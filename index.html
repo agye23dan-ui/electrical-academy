@@ -1,0 +1,3401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Electrical Academy - Interactive NVTI General Electrical Certificate One & Two study companion with interactive circuits, simulators, trade calculators, and mock exams.">
+<meta name="theme-color" content="#0a0f1d">
+<title>Electrical Academy ⚡ NVTI Cert 1 & 2 Master Suite</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Daylight Theme (Clean Ice Slate) */
+  --bg: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --card: #ffffff;
+  --card-hover: #fcfdfe;
+  --glass: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(226, 232, 240, 0.85);
+  --ink: #0f172a;
+  --ink-secondary: #334155;
+  --mut: #64748b;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+
+  /* Electrical Accents */
+  --cold: #0284c7;
+  --cold-hover: #0369a1;
+  --cold-glow: rgba(2, 132, 199, 0.15);
+  --cold-subtle: rgba(2, 132, 199, 0.08);
+  --hot: #ef4444;
+  --hot-subtle: rgba(239, 68, 68, 0.1);
+  --cu: #d97706;
+  --cu-subtle: rgba(217, 119, 6, 0.12);
+  --ok: #10b981;
+  --ok-subtle: rgba(16, 185, 129, 0.12);
+  --gold: #f59e0b;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 16px 32px -6px rgba(15, 23, 42, 0.1);
+  --shadow-glow: 0 0 25px rgba(2, 132, 199, 0.18);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+[data-theme="dark"], @media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090e17;
+    --bg-subtle: #0f1726;
+    --card: #131c2d;
+    --card-hover: #172338;
+    --glass: rgba(19, 28, 45, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --ink: #f8fafc;
+    --ink-secondary: #e2e8f0;
+    --mut: #94a3b8;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.16);
+
+    --cold: #38bdf8;
+    --cold-hover: #7dd3fc;
+    --cold-glow: rgba(56, 189, 248, 0.22);
+    --cold-subtle: rgba(56, 189, 248, 0.12);
+    --hot: #f87171;
+    --hot-subtle: rgba(248, 113, 113, 0.15);
+    --cu: #fbbf24;
+    --cu-subtle: rgba(251, 191, 36, 0.14);
+    --ok: #34d399;
+    --ok-subtle: rgba(52, 211, 153, 0.15);
+    --gold: #fbbf24;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.2);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 15.5px;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background-image: radial-gradient(circle at 50% 0%, var(--cold-subtle) 0%, transparent 60%);
+  background-attachment: fixed;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* =====================================================================
+   App Header & Navigation
+===================================================================== */
+.header-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--glass);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
+}
+
+header {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px var(--cold-glow);
+}
+
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-meta span.sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--mut);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: -3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: var(--bg-subtle);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.icon-btn:hover {
+  background: var(--card);
+  border-color: var(--cold);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.streak-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--cu-subtle);
+  color: var(--cu);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.streak-pill-btn:hover { transform: translateY(-1px); background: var(--cu); color: #fff; }
+
+.progress-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cold-subtle);
+  color: var(--cold);
+  border: 1px solid var(--cold-glow);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.progress-pill-btn:hover {
+  background: var(--cold);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* =====================================================================
+   Sidebar & Wide App Shell Layout
+===================================================================== */
+.app-layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  padding: 18px 20px;
+  position: relative;
+}
+
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px 10px;
+  height: calc(100vh - 96px);
+  position: sticky;
+  top: 76px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 30;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+
+.sidebar-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-group-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+  padding: 14px 10px 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background: var(--bg-subtle);
+  color: var(--cold);
+}
+
+.sidebar-link.active {
+  background: var(--cold-subtle);
+  color: var(--cold);
+  border-left: 3px solid var(--cold);
+  font-weight: 700;
+}
+
+.sidebar-link .mod-code {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: var(--bg-subtle);
+  color: var(--cold);
+  font-weight: 700;
+  min-width: 44px;
+  text-align: center;
+}
+
+.sidebar-link.active .mod-code {
+  background: var(--cold);
+  color: #fff;
+}
+
+.sidebar-link .mod-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.85rem;
+}
+
+.sidebar-link .status-dot {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 80;
+  display: none;
+}
+
+.sidebar-search {
+  padding: 0 4px 10px;
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.sidebar-search input:focus {
+  border-color: var(--cold);
+  background: var(--card);
+  box-shadow: 0 0 0 3px var(--cold-glow);
+}
+
+@media (max-width: 1024px) {
+  body.sidebar-open .sidebar-backdrop { display: block; }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+  body.sidebar-open .sidebar { transform: translateX(0); }
+}
+
+@media (min-width: 1025px) {
+  body.sidebar-collapsed .sidebar {
+    display: none;
+  }
+}
+
+.content-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+main {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 48px;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2, h3, h4 {
+  color: var(--ink);
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.85rem; margin-bottom: 0.4em; }
+h2 { font-size: 1.35rem; margin: 1.8em 0 0.8em; }
+h3 { font-size: 1.15rem; color: var(--cold); margin: 1.4em 0 0.5em; }
+
+p { margin-bottom: 1em; color: var(--ink-secondary); }
+
+/* Breadcrumbs */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  margin-bottom: 18px;
+  color: var(--mut);
+}
+
+.breadcrumb a {
+  color: var(--cold);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* =====================================================================
+   Wide Lesson Cards
+===================================================================== */
+.wide-lesson-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: 22px 26px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wide-lesson-card.status-mastered { border-left-color: var(--gold); }
+.wide-lesson-card.status-passed { border-left-color: var(--ok); }
+.wide-lesson-card.status-warn { border-left-color: var(--cu); }
+.wide-lesson-card.status-unstarted { border-left-color: var(--line-strong); }
+
+.wide-lesson-card:hover {
+  border-color: var(--cold);
+  border-left-width: 7px;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  background: var(--card-hover);
+}
+
+.wide-lesson-card.status-mastered:hover { border-left-color: var(--gold); }
+.wide-lesson-card.status-passed:hover { border-left-color: var(--ok); }
+.wide-lesson-card.status-warn:hover { border-left-color: var(--hot); }
+
+.wlc-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.wlc-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.wlc-syllabus-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--mut);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wlc-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.wlc-desc {
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.wlc-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.8rem;
+  color: var(--mut);
+  font-weight: 600;
+}
+
+.wlc-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.wlc-action-btn {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--cold);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 680px) {
+  .wide-lesson-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+  .wlc-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+}
+
+/* Hero Progress Banner */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(217, 119, 6, 0.08));
+  border: 1px solid var(--cold-glow);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: '⚡';
+  position: absolute;
+  right: -10px;
+  bottom: -25px;
+  font-size: 8rem;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.hero-desc {
+  color: var(--mut);
+  font-size: 0.95rem;
+  max-width: 680px;
+  margin: 0;
+}
+
+.hero-progress-track {
+  height: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 16px 0 10px;
+}
+
+.hero-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cold), var(--ok));
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Category Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  margin-bottom: 12px;
+  scrollbar-width: none;
+}
+.filter-tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  padding: 8px 16px;
+  border-radius: 99px;
+  background: var(--bg-subtle);
+  color: var(--mut);
+  border: 1px solid var(--line);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+  border-color: var(--cold);
+}
+
+.tab-btn.active {
+  background: var(--cold);
+  color: #fff;
+  border-color: var(--cold);
+  box-shadow: 0 2px 8px var(--cold-glow);
+}
+
+.modules-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Standard Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin: 14px 0;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+a.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.card:hover, a.card:focus-visible {
+  border-color: var(--cold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  background: var(--card-hover);
+}
+
+/* Pills & Badges */
+.pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: var(--bg-subtle);
+  color: var(--mut);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pill.ok {
+  background: var(--ok-subtle);
+  color: var(--ok);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.pill.gold {
+  background: var(--cu-subtle);
+  color: var(--gold);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.pill.warn {
+  background: var(--hot-subtle);
+  color: var(--hot);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.module-code-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--cold-subtle);
+  color: var(--cold);
+  border: 1px solid var(--cold-glow);
+  min-width: 54px;
+  text-align: center;
+}
+
+/* Buttons */
+button, .btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--cold);
+  color: #ffffff;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px var(--cold-glow);
+  text-decoration: none;
+}
+
+button:hover, .btn:hover {
+  background: var(--cold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--cold-glow);
+}
+
+button:active, .btn:active { transform: translateY(0); }
+
+button.secondary, .btn.secondary {
+  background: var(--bg-subtle);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+button.secondary:hover, .btn.secondary:hover {
+  background: var(--card);
+  border-color: var(--cold);
+}
+
+button:focus-visible, input:focus-visible, label:focus-within {
+  outline: 2px solid var(--cold);
+  outline-offset: 2px;
+}
+
+/* Quiz Experience 2.0 */
+.quiz-container { margin-top: 24px; }
+.q {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--mut);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.q-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+.q-options { display: flex; flex-direction: column; gap: 10px; }
+.q-opt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.16s ease;
+  user-select: none;
+}
+.q-opt:hover { background: var(--card); border-color: var(--cold); }
+.q-opt input[type="radio"] { display: none; }
+.opt-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1.5px solid var(--line-strong);
+  display: grid;
+  place-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--mut);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  transition: all 0.16s ease;
+}
+.q-opt.selected { background: var(--cold-subtle); border-color: var(--cold); }
+.q-opt.selected .opt-badge { background: var(--cold); color: #fff; border-color: var(--cold); }
+.q-opt.good { background: var(--ok-subtle) !important; border-color: var(--ok) !important; }
+.q-opt.good .opt-badge { background: var(--ok); color: #fff; border-color: var(--ok); }
+.q-opt.bad { background: var(--hot-subtle) !important; border-color: var(--hot) !important; }
+.q-opt.bad .opt-badge { background: var(--hot); color: #fff; border-color: var(--hot); }
+.why {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--cold);
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+  display: none;
+}
+.why.show { display: block; animation: fadeIn 0.25s ease; }
+.quiz-footer { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+
+/* Score Card */
+.score-card {
+  background: var(--card);
+  border: 2px solid var(--ok);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-lg), 0 0 30px var(--ok-subtle);
+  animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 20px;
+}
+.score-card.fail { border-color: var(--cu); box-shadow: var(--shadow-lg), 0 0 30px var(--cu-subtle); }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.score-num {
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--ink);
+  line-height: 1;
+  margin: 8px 0;
+}
+
+/* Exam HUD */
+.exam-hud {
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+.timer-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+.timer-box.urgent { color: var(--hot); animation: pulse 1s infinite alternate; }
+@keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
+
+/* SVGs & Schematics */
+.svg-wrap {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin: 18px 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.svg-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+svg text { fill: var(--ink); font-family: var(--font-sans); font-weight: 600; font-size: 12px; }
+svg .f { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+svg .h { stroke: var(--hot); }
+svg .c { stroke: var(--cold); }
+svg .w { fill: var(--card); }
+svg .t { fill: var(--ink); }
+svg.sm text { font-size: 10.5px; }
+/* Drawing colour code: live/L1 brown, neutral blue (.c), earth green with yellow dashes (.e), L2 black, L3 grey */
+:root { --live: #92400e; --p3: #64748b; --earth: #16a34a; --earthy: #facc15; }
+:root[data-theme="dark"] { --live: #d97706; --p3: #94a3b8; --earth: #4ade80; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --live: #d97706; --p3: #94a3b8; --earth: #4ade80; } }
+svg text { paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+svg .lv, svg .p1 { stroke: var(--live); }
+svg .p2 { stroke: var(--ink); }
+svg .p3 { stroke: var(--p3); }
+svg .e { stroke: var(--earth); }
+svg .th { stroke-width: 1.2; }
+svg .k { stroke-width: 3.6; }
+svg .dsh { stroke-dasharray: 6 4; }
+svg text.tc { fill: var(--cold); }
+svg text.tr { fill: var(--hot); }
+
+@keyframes flowAnim { to { stroke-dashoffset: -24; } }
+.flowing svg path.f { stroke-dasharray: 6 3; animation: flowAnim 0.75s linear infinite; }
+.flowing svg path.h { stroke-dasharray: 6 3; animation: flowAnim 0.5s linear infinite; }
+.flowing svg path.c { stroke-dasharray: 6 3; animation: flowAnim 0.75s linear infinite reverse; }
+
+/* Drawing Canvas */
+.draw-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: var(--shadow-sm);
+}
+.canvas-container {
+  position: relative;
+  background: #ffffff;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  margin: 14px 0;
+  overflow: hidden;
+  touch-action: none;
+}
+[data-theme="dark"] .canvas-container {
+  background: #0d1522;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.sketch-canvas {
+  display: block;
+  width: 100%;
+  height: 220px;
+  cursor: crosshair;
+}
+.canvas-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Job Steps */
+.job-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.job-step:hover { background: var(--card); border-color: var(--cold); }
+.job-step input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--cold); margin-top: 3px; cursor: pointer; }
+.job-step.done { opacity: 0.65; text-decoration: line-through; background: var(--card); }
+
+.instructor-sign-box {
+  border: 2px dashed var(--cu);
+  background: var(--cu-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-top: 24px;
+}
+.sig-pad {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  width: 100%;
+  height: 110px;
+  cursor: crosshair;
+  touch-action: none;
+  display: block;
+  margin: 8px 0;
+}
+[data-theme="dark"] .sig-pad { background: #0f1726; }
+
+/* Flashcards */
+.flashcard-wrap { perspective: 1000px; max-width: 540px; margin: 24px auto; }
+.flashcard {
+  width: 100%;
+  min-height: 260px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, var(--card), var(--bg-subtle));
+  border-color: var(--cold);
+}
+
+/* Certificate */
+.cert-frame {
+  border: 8px double var(--cu);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  background: var(--card);
+  text-align: center;
+  box-shadow: var(--shadow-lg), 0 0 35px var(--cu-subtle);
+  position: relative;
+  margin: 20px 0;
+}
+.cert-seal {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  margin: 0 auto 14px;
+  box-shadow: 0 4px 14px var(--cu-subtle);
+}
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .header-wrap, .mobile-nav, .sidebar, .sidebar-backdrop, button, .btn, .icon-btn, .breadcrumb { display: none !important; }
+  .app-layout { padding: 0 !important; display: block !important; }
+  main { max-width: 100% !important; padding: 0 !important; }
+  .cert-frame { border: 6px double #000 !important; box-shadow: none !important; }
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  display: none;
+  place-items: center;
+  padding: 16px;
+  animation: fadeIn 0.18s ease;
+}
+.modal-overlay.open { display: grid; }
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 85vh;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.search-input-wrap {
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.search-input-wrap input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  font-size: 1.1rem;
+  color: var(--ink);
+  outline: none;
+  font-family: inherit;
+}
+.search-results { overflow-y: auto; padding: 10px; max-height: 60vh; }
+.search-item {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+.search-item:hover { background: var(--bg-subtle); color: var(--cold); }
+
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 150; }
+
+/* Mobile Bottom Navigation */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+}
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--mut);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: all 0.18s ease;
+}
+.nav-tab.active { color: var(--cold); background: var(--cold-subtle); }
+.nav-tab span.icon { font-size: 1.25rem; }
+
+.note {
+  border-left: 4px solid var(--cu);
+  padding: 12px 16px;
+  background: var(--cu-subtle);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 16px 0;
+  font-size: 0.95rem;
+}
+
+details.card summary {
+  cursor: pointer;
+  font-weight: 700;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+details.card summary::-webkit-details-marker { display: none; }
+details.card summary::after { content: '▾'; font-size: 1.1rem; transition: transform 0.2s ease; }
+details.card[open] summary::after { transform: rotate(180deg); }
+details.card p { margin-top: 12px; }
+
+ul { padding-left: 1.4em; margin-bottom: 1em; }
+li { margin-bottom: 0.35em; color: var(--ink-secondary); }
+
+@media (min-width: 1025px) {
+  .mobile-nav { display: none; }
+  body { padding-bottom: 40px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Header -->
+<div class="header-wrap">
+  <header>
+    <div class="brand-group">
+      <button class="icon-btn" id="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Modules Sidebar" aria-label="Toggle Sidebar">☰</button>
+      <a href="#/" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-meta">
+          <span>Electrical Academy</span>
+          <span class="sub">NVTI Cert 1 & 2 • Master Suite</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a href="#/daily" class="streak-pill-btn" title="Daily 5-Question Drill">🔥 <span id="hdr-streak">0</span></a>
+      <button class="icon-btn" id="btn-search" title="Search (Ctrl+K)" aria-label="Search">🔍</button>
+      <button class="icon-btn" id="btn-sound" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      <button class="icon-btn" id="btn-theme" title="Toggle Theme" aria-label="Toggle Theme">🌓</button>
+      <button class="progress-pill-btn" id="btn-stats" title="View Progress">⚡ <span id="hdr-pct">0%</span></button>
+    </div>
+  </header>
+</div>
+
+<!-- Main App Shell with Sidebar -->
+<div class="app-layout">
+  <!-- Backdrop for mobile drawer -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebarDrawer()"></div>
+
+  <!-- Sidebar Component -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">CURRICULUM MODULES</div>
+      <span class="pill" id="sidebar-counter">18 Topics</span>
+    </div>
+    <div class="sidebar-search">
+      <input type="text" id="sidebar-filter-input" placeholder="🔍 Quick filter modules..." oninput="filterSidebar(this.value)">
+    </div>
+    <nav class="sidebar-nav" id="sidebar-nav"></nav>
+  </aside>
+
+  <!-- Main Content Wrap -->
+  <div class="content-wrap">
+    <main id="app"></main>
+  </div>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-nav">
+  <a href="#/" class="nav-tab" data-nav="home"><span class="icon">📚</span><span>Modules</span></a>
+  <a href="#/sims" class="nav-tab" data-nav="sims"><span class="icon">⚡</span><span>Bench</span></a>
+  <a href="#/tools" class="nav-tab" data-nav="tools"><span class="icon">🧮</span><span>Toolkit</span></a>
+  <a href="#/jobs" class="nav-tab" data-nav="jobs"><span class="icon">🛠️</span><span>Jobs</span></a>
+  <a href="#/draw" class="nav-tab" data-nav="draw"><span class="icon">📐</span><span>Drawing</span></a>
+</nav>
+
+<!-- Spotlight Search Modal -->
+<div class="modal-overlay" id="search-modal">
+  <div class="modal-box">
+    <div class="search-input-wrap">
+      <span>🔍</span>
+      <input type="text" id="search-box" placeholder="Search modules, simulators, calculators, jobs..." autocomplete="off">
+      <button class="icon-btn" id="search-close" style="width:30px;height:30px">✕</button>
+    </div>
+    <div class="search-results" id="search-list"></div>
+  </div>
+</div>
+
+<!-- Stats Modal -->
+<div class="modal-overlay" id="stats-modal">
+  <div class="modal-box" style="padding:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2>Your Progress Hub</h2>
+      <button class="icon-btn" id="stats-close">✕</button>
+    </div>
+    <div id="stats-body"></div>
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <a class="btn" href="#/report" onclick="$('#stats-modal').classList.remove('open')">📄 Full Academic Transcript</a>
+      <button class="secondary" id="btn-reset-data" style="color:var(--hot);border-color:var(--hot-subtle);">Reset Progress</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="elec1.js"></script>
+<script src="elec2.js"></script>
+<script src="elec3.js"></script>
+<script src="elec4.js"></script>
+<script src="elec5.js"></script>
+<script src="elec6.js"></script>
+<script src="elec7.js"></script>
+<script src="elec8.js"></script>
+<script src="elec9.js"></script>
+<script src="elec10.js"></script>
+<script src="elec11.js"></script>
+<script src="cg0.js"></script>
+<script src="cg1.js"></script>
+<script src="cg2.js"></script>
+<script src="cg3.js"></script>
+<script src="cg4.js"></script>
+<script src="cg5.js"></script>
+<script src="cl0.js"></script>
+<script src="cl1.js"></script>
+<script src="cl2.js"></script>
+<script src="cl3.js"></script>
+<script src="cl4.js"></script>
+<script src="cl5.js"></script>
+<script src="cl6.js"></script>
+<script src="elec12.js"></script>
+<script src="elec13.js"></script>
+<script src="cgviews.js"></script>
+<script src="bench.js"></script>
+<script src="houseengine.js"></script>
+<script src="housegen.js"></script>
+<script src="houseui.js"></script>
+<script src="mathfix.js"></script>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const app = $('#app');
+
+// Local storage progress store
+let P = {};
+try { P = JSON.parse(localStorage.getItem('ela') || '{}'); } catch(e) {}
+P.sig = P.sig || {};
+P.streak = P.streak || 0;
+P.lastDaily = P.lastDaily || '';
+
+const save = () => {
+  try { localStorage.setItem('ela', JSON.stringify(P)); } catch(e) {}
+  updateHeaderProgress();
+  renderSidebar();
+};
+
+// Sound setting & Web Audio Synthesizer
+let soundEnabled = localStorage.getItem('ela-sound') !== '0';
+const updateSoundBtn = () => { const b = $('#btn-sound'); if(b) b.textContent = soundEnabled ? '🔊' : '🔇'; };
+$('#btn-sound').onclick = () => {
+  soundEnabled = !soundEnabled;
+  localStorage.setItem('ela-sound', soundEnabled ? '1' : '0');
+  updateSoundBtn();
+  if(soundEnabled) playTone(587.33, 'sine', 0.1, 0.08);
+};
+updateSoundBtn();
+
+let audioCtx = null;
+function playTone(freq, type='sine', duration=0.1, gain=0.08) {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    g.gain.setValueAtTime(gain, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e) {}
+}
+
+function playClick() { playTone(800, 'triangle', 0.04, 0.05); }
+function playVictory() {
+  if (!soundEnabled) return;
+  [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+    setTimeout(() => playTone(f, 'sine', 0.25, 0.1), i * 90);
+  });
+}
+
+// Theme management
+const themeBtn = $('#btn-theme');
+const applyTheme = (t) => {
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  else if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  else document.documentElement.removeAttribute('data-theme');
+};
+let curTheme = localStorage.getItem('ela-theme') || 'auto';
+applyTheme(curTheme);
+themeBtn.onclick = () => {
+  curTheme = curTheme === 'dark' ? 'light' : curTheme === 'light' ? 'auto' : 'dark';
+  localStorage.setItem('ela-theme', curTheme);
+  applyTheme(curTheme);
+  playClick();
+};
+
+// Sidebar Toggle Drawer & Desktop Collapse
+if (localStorage.getItem('ela-sidebar-collapsed') === '1') {
+  document.body.classList.add('sidebar-collapsed');
+}
+
+window.toggleSidebar = () => {
+  if (window.innerWidth <= 1024) {
+    document.body.classList.toggle('sidebar-open');
+  } else {
+    document.body.classList.toggle('sidebar-collapsed');
+    localStorage.setItem('ela-sidebar-collapsed', document.body.classList.contains('sidebar-collapsed') ? '1' : '0');
+  }
+  playClick();
+};
+window.closeSidebarDrawer = () => {
+  document.body.classList.remove('sidebar-open');
+};
+
+// Canvas Confetti Generator
+function fireConfetti() {
+  const canvas = $('#confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const particles = [];
+  const colors = ['#0ea5e9', '#38bdf8', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+  for (let i = 0; i < 70; i++) {
+    particles.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2 + 50,
+      vx: (Math.random() - 0.5) * 16,
+      vy: (Math.random() - 0.9) * 18,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vrot: (Math.random() - 0.5) * 12,
+      life: 1
+    });
+  }
+  const render = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let active = false;
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.45;
+      p.vx *= 0.98;
+      p.rot += p.vrot;
+      p.life -= 0.012;
+      if (p.life > 0) {
+        active = true;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+        ctx.restore();
+      }
+    });
+    if (active) requestAnimationFrame(render);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+  render();
+}
+
+// Data aggregation
+const M = [];
+if (window.Y && window.Y.mods) M.push(...Y.mods);
+if (window.Z && window.Z.mods) M.push(...Z.mods);
+if (window.fixModule) M.forEach(fixModule);
+if (window.X) M.forEach(m => { const x = X[m.id]; if(x) { m.n += x.n; m.q = m.q.concat(x.q); } });
+// City & Guilds lessons (ids start with 'cg') are tracked separately from the NVTI lessons.
+const isCG = m => m.id.startsWith('cg');
+const NV = M.filter(m => !isCG(m));
+
+const D = [
+  ['Compressor', 'Raises refrigerant pressure and temperature. Discharges hot high-pressure vapor.', 'h'],
+  ['Condenser', 'Outdoor coil. Hot vapor releases heat to outside air and condenses into liquid.', 'h'],
+  ['Expansion device', 'Capillary tube or TXV. Restricts flow, producing a steep pressure and temperature drop.', 'c'],
+  ['Evaporator', 'Indoor coil. Cold refrigerant boils and absorbs heat from room air.', 'c']
+];
+
+const shuffle = a => {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.random() * (i + 1) | 0;
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const best = k => P[k] != null ? P[k] : null;
+
+const jobTotal = () => (window.Y && Y.jobs) ? Y.jobs.reduce((a, j) => a + j.steps.length, 0) : 1;
+const jobDone = () => Object.values(P.j || {}).reduce((a, x) => a + (x || []).filter(Boolean).length, 0);
+const jobPct = () => Math.round(jobDone() / (jobTotal() || 1) * 100);
+
+function updateHeaderProgress() {
+  const done = NV.filter(m => (best(m.id) || 0) >= 70).length;
+  const pct = Math.round((done / (NV.length || 1)) * 100);
+  const pEl = $('#hdr-pct');
+  if (pEl) pEl.textContent = pct + '%';
+  const sEl = $('#hdr-streak');
+  if (sEl) sEl.textContent = P.streak || 0;
+}
+updateHeaderProgress();
+
+function updateActiveNav(routeKey) {
+  $$('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.nav === routeKey);
+  });
+}
+
+// =====================================================================
+// Sidebar Navigation Component
+// =====================================================================
+let sidebarQuery = '';
+window.filterSidebar = (q) => {
+  sidebarQuery = (q || '').trim().toLowerCase();
+  renderSidebar();
+};
+
+function renderSidebar() {
+  const sb = $('#sidebar-nav');
+  if (!sb) return;
+
+  const currentHash = location.hash || '#/';
+
+  const rawGroups = [
+    {
+      title: 'Certificate One (Core)',
+      icon: '📘',
+      mods: M.filter(m => m.id.startsWith('e1'))
+    },
+    {
+      title: 'Certificate Two (Advanced)',
+      icon: '📙',
+      mods: M.filter(m => m.id.startsWith('e2'))
+    },
+    {
+      title: 'Standards & Practice',
+      icon: '🌐',
+      mods: M.filter(m => m.id.startsWith('int') || m.id === 'gpe')
+    },
+    {
+      title: 'City & Guilds 2365 Level 2',
+      icon: '🏅',
+      mods: M.filter(m => m.id.startsWith('cg2'))
+    },
+    {
+      title: 'City & Guilds 2365 Level 3',
+      icon: '🥇',
+      mods: M.filter(m => m.id.startsWith('cg3'))
+    }
+  ];
+
+  let html = '';
+  let matchCount = 0;
+
+  rawGroups.forEach(g => {
+    const filteredMods = sidebarQuery 
+      ? g.mods.filter(m => m.id.toLowerCase().includes(sidebarQuery) || m.t.toLowerCase().includes(sidebarQuery) || (m.s && m.s.toLowerCase().includes(sidebarQuery)))
+      : g.mods;
+
+    if (filteredMods.length > 0) {
+      matchCount += filteredMods.length;
+      html += `<div class="sidebar-group-title">${g.icon} ${g.title}</div>`;
+      filteredMods.forEach(m => {
+        const score = best(m.id);
+        let statusIcon = '○';
+        let statusColor = 'var(--mut)';
+        if (score != null) {
+          if (score === 100) { statusIcon = '★'; statusColor = 'var(--gold)'; }
+          else if (score >= 70) { statusIcon = '✓'; statusColor = 'var(--ok)'; }
+          else { statusIcon = '⚠️'; statusColor = 'var(--hot)'; }
+        }
+        const isActive = currentHash === `#/m/${m.id}`;
+        html += `
+          <a class="sidebar-link ${isActive ? 'active' : ''}" href="#/m/${m.id}" onclick="closeSidebarDrawer()">
+            <span class="mod-code">${m.id.toUpperCase()}</span>
+            <span class="mod-name" title="${m.t}">${m.t.replace(/^[A-Z0-9·]+\s*/, '')}</span>
+            <span class="status-dot" style="color:${statusColor};">${statusIcon} ${score != null ? score + '%' : ''}</span>
+          </a>
+        `;
+      });
+    }
+  });
+
+  if (!sidebarQuery || 'bench tools simulators ohm switch circuit'.includes(sidebarQuery)) {
+    html += `
+      <div class="sidebar-group-title">⚡ Practical Bench & Tools</div>
+      <a class="sidebar-link ${currentHash === '#/sims' ? 'active' : ''}" href="#/sims" onclick="closeSidebarDrawer()">
+        <span class="mod-code">SIM</span>
+        <span class="mod-name">Virtual Bench Simulators</span>
+        <span class="status-dot" style="color:var(--ok);">⚡</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/house' ? 'active' : ''}" href="#/house" onclick="closeSidebarDrawer()">
+        <span class="mod-code">HOUSE</span>
+        <span class="mod-name">House Wiring Practice</span>
+        <span class="status-dot" style="color:var(--ok);">🏠</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/tools' ? 'active' : ''}" href="#/tools" onclick="closeSidebarDrawer()">
+        <span class="mod-code">CALC</span>
+        <span class="mod-name">Pocket Trade Toolkit</span>
+        <span class="status-dot">🧮</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/flashcards' ? 'active' : ''}" href="#/flashcards" onclick="closeSidebarDrawer()">
+        <span class="mod-code">CARD</span>
+        <span class="mod-name">Active Recall Flashcards</span>
+        <span class="status-dot" style="color:var(--gold);">🎴</span>
+      </a>
+      <a class="sidebar-link ${currentHash.startsWith('#/job') ? 'active' : ''}" href="#/jobs" onclick="closeSidebarDrawer()">
+        <span class="mod-code">JOB</span>
+        <span class="mod-name">Practical Job Sheets</span>
+        <span class="status-dot">${jobPct()}%</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/draw' ? 'active' : ''}" href="#/draw" onclick="closeSidebarDrawer()">
+        <span class="mod-code">DRAW</span>
+        <span class="mod-name">Trade Drawing Lab</span>
+        <span class="status-dot">📐</span>
+      </a>
+    `;
+  }
+
+  if (!sidebarQuery || 'exam mock cert test certification'.includes(sidebarQuery)) {
+    html += `
+      <div class="sidebar-group-title">⏱️ Examination Center</div>
+      <a class="sidebar-link ${currentHash === '#/exam/e1' ? 'active' : ''}" href="#/exam/e1" onclick="closeSidebarDrawer()">
+        <span class="mod-code">E1</span>
+        <span class="mod-name">NVTI Cert 1 Mock Exam</span>
+        <span class="status-dot">${best('exame1') != null ? best('exame1') + '%' : '–'}</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/exam/e2' ? 'active' : ''}" href="#/exam/e2" onclick="closeSidebarDrawer()">
+        <span class="mod-code">E2</span>
+        <span class="mod-name">NVTI Cert 2 Mock Exam</span>
+        <span class="status-dot">${best('exame2') != null ? best('exame2') + '%' : '–'}</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/exam/int' ? 'active' : ''}" href="#/exam/int" onclick="closeSidebarDrawer()">
+        <span class="mod-code">INT</span>
+        <span class="mod-name">International Practice Exam</span>
+        <span class="status-dot">${best('examint') != null ? best('examint') + '%' : '–'}</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/cg' ? 'active' : ''}" href="#/cg" onclick="closeSidebarDrawer()">
+        <span class="mod-code">C&G</span>
+        <span class="mod-name">City & Guilds Levels 2 and 3</span>
+        <span class="status-dot">🏅</span>
+      </a>
+      <a class="sidebar-link ${currentHash === '#/cert' ? 'active' : ''}" href="#/cert" onclick="closeSidebarDrawer()">
+        <span class="mod-code">CERT</span>
+        <span class="mod-name">Readiness Certificate</span>
+        <span class="status-dot">🎓</span>
+      </a>
+    `;
+  }
+
+  if (sidebarQuery && matchCount === 0) {
+    html = `<div style="padding:16px;text-align:center;color:var(--mut);font-size:0.85rem;">No matching modules found for "${sidebarQuery}"</div>`;
+  }
+
+  sb.innerHTML = html;
+  const ctr = $('#sidebar-counter');
+  if (ctr) ctr.textContent = sidebarQuery ? `${matchCount} matches` : `${M.length} Topics`;
+
+  const activeLink = sb.querySelector('.sidebar-link.active');
+  if (activeLink && !sidebarQuery) {
+    setTimeout(() => {
+      activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 50);
+  }
+}
+
+// =====================================================================
+// View 1: Home Dashboard with Wide Lesson Cards
+// =====================================================================
+let currentFilter = 'all';
+
+function home() {
+  updateActiveNav('home');
+  const done = NV.filter(m => (best(m.id) || 0) >= 70).length;
+  const total = NV.length;
+  const pct = Math.round(done / total * 100);
+  const nextMod = NV.find(m => (best(m.id) || 0) < 70) || NV[0];
+
+  let html = `
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-header">
+          <div>
+            <h1 class="hero-title">Welcome to Electrical Academy</h1>
+            <p class="hero-desc">Interactive companion for NVTI General Electrical Certificate One & Two, with a City & Guilds 2365 Level 2 study track. Master circuit theory, trade calculations, practical job sign-offs, and simulation benches.</p>
+          </div>
+        </div>
+        <div class="hero-progress-track">
+          <div class="hero-progress-fill" style="width: ${pct}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.86rem;color:var(--mut);">
+          <span><b>${done}</b> of <b>${total}</b> modules passed (${pct}%)</span>
+          ${nextMod ? `<a href="#/m/${nextMod.id}" style="color:var(--cold);text-decoration:none;font-weight:700;">Resume: ${nextMod.id.toUpperCase()} →</a>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Hub -->
+    <h2>Interactive Bench, Toolkit & Exams</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:12px;margin-bottom:28px;">
+      <a class="card" href="#/cg">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">🏅 City & Guilds 2365 Track</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Levels 2 and 3: ${M.filter(isCG).length} detailed lessons, unit tests and practicals</p>
+          </div>
+          <span class="pill gold">New</span>
+        </div>
+      </a>
+      <a class="card" href="#/sims">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">⚡ Virtual Circuit Simulators</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">12 simulators: switching, motor starting, protection, testing and calculations</p>
+          </div>
+          <span class="pill ok">Interactive</span>
+        </div>
+      </a>
+      <a class="card" href="#/tools">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">🧮 Electrician's Pocket Toolkit</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Ohm's wheel, cable drop, conduit fill & resistors</p>
+          </div>
+          <span class="pill">Calculators</span>
+        </div>
+      </a>
+      <a class="card" href="#/flashcards">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">🎴 Active Recall Flashcards</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Symbols, definitions, formulas & 3D cards</p>
+          </div>
+          <span class="pill gold">Revision</span>
+        </div>
+      </a>
+      <a class="card" href="#/jobs">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">🛠️ Practical Job Sheets</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Workshop tasks & instructor digital sign-off</p>
+          </div>
+          <span class="pill ${jobPct() >= 100 ? 'ok' : ''}">${jobPct()}% Done</span>
+        </div>
+      </a>
+      <a class="card" href="#/draw">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">📐 Trade Drawing Lab</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Schematic study & canvas sketchpad</p>
+          </div>
+          <span class="pill">Interactive</span>
+        </div>
+      </a>
+      <a class="card" href="#/cert">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <b style="font-size:1.05rem;">🎓 NVTI Readiness Certificate</b>
+            <p style="font-size:0.85rem;color:var(--mut);margin:4px 0 0;">Official completion certificate & printout</p>
+          </div>
+          <span class="pill">${pct >= 70 ? 'Eligible ✓' : 'In Progress'}</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Curriculum Modules Section -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h2>Curriculum Modules & Lessons</h2>
+      <span style="font-size:0.85rem;color:var(--mut);">${M.length} Total Lessons</span>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="tab-btn ${currentFilter==='all'?'active':''}" onclick="setFilter('all')">All Lessons</button>
+      <button class="tab-btn ${currentFilter==='e1'?'active':''}" onclick="setFilter('e1')">Certificate One</button>
+      <button class="tab-btn ${currentFilter==='e2'?'active':''}" onclick="setFilter('e2')">Certificate Two</button>
+      <button class="tab-btn ${currentFilter==='int'?'active':''}" onclick="setFilter('int')">International & General</button>
+      <button class="tab-btn ${currentFilter==='cg'?'active':''}" onclick="setFilter('cg')">City & Guilds</button>
+    </div>
+
+    <div class="modules-grid" id="modules-list">
+  `;
+
+  const filtered = M.filter(m => {
+    if (currentFilter === 'e1') return m.id.startsWith('e1');
+    if (currentFilter === 'e2') return m.id.startsWith('e2');
+    if (currentFilter === 'int') return m.id.startsWith('int') || m.id === 'gpe';
+    if (currentFilter === 'cg') return isCG(m);
+    return true;
+  });
+
+  html += filtered.map(m => {
+    const score = best(m.id);
+    let pillClass = '';
+    let pillText = '○ Not Started';
+    let btnText = 'Start Lesson →';
+    let statusClass = 'status-unstarted';
+
+    if (score != null) {
+      if (score === 100) { pillClass = 'gold'; pillText = '★ 100% Mastered'; btnText = 'Review Lesson →'; statusClass = 'status-mastered'; }
+      else if (score >= 70) { pillClass = 'ok'; pillText = `✓ ${score}% Passed`; btnText = 'Review Lesson →'; statusClass = 'status-passed'; }
+      else { pillClass = 'warn'; pillText = `⚠️ ${score}% Needs Review`; btnText = 'Retake Lesson →'; statusClass = 'status-warn'; }
+    }
+
+    const cleanDesc = m.n.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160) + '…';
+
+    return `
+      <a class="wide-lesson-card ${statusClass}" href="#/m/${m.id}">
+        <div class="wlc-left">
+          <div class="wlc-badge-row">
+            <span class="module-code-badge">${m.id.toUpperCase()}</span>
+            <span class="wlc-syllabus-pill">${m.s}</span>
+          </div>
+          <h3 class="wlc-title">${m.t}</h3>
+          <p class="wlc-desc">${cleanDesc}</p>
+          <div class="wlc-meta">
+            <span>📝 ${m.q.length} Exam Questions</span>
+            ${m.f && m.f.length ? `<span>📐 ${m.f.length} Schematics</span>` : ''}
+            ${m.w && m.w.length ? `<span>✍️ ${m.w.length} Written Tasks</span>` : ''}
+          </div>
+        </div>
+        <div class="wlc-right">
+          <span class="pill ${pillClass}">${pillText}</span>
+          <span class="wlc-action-btn">${btnText}</span>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  html += `</div>`;
+  app.innerHTML = html;
+}
+
+window.setFilter = (f) => {
+  currentFilter = f;
+  home();
+};
+
+// =====================================================================
+// View 2: Module View
+// =====================================================================
+function mod(id) {
+  updateActiveNav('home');
+  const m = M.find(x => x.id === id);
+  if (!m) return home();
+
+  const prevMod = M[M.indexOf(m) - 1];
+  const nextMod = M[M.indexOf(m) + 1];
+
+  let html = `
+    <div class="breadcrumb">
+      <a href="#/">← All Modules</a> / <span>${m.id.toUpperCase()}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span class="module-code-badge">${m.id.toUpperCase()}</span>
+      <span style="font-size:0.85rem;color:var(--mut);font-weight:600;">${m.s}</span>
+    </div>
+    <h1>${m.t}</h1>
+    ${window.cgBanner ? cgBanner(m) : ''}
+    <div class="card" style="margin:20px 0;">${m.n}</div>
+  `;
+
+  if (m.x === 'cycle') html += diagram();
+  if (m.x === 'calc') html += calc();
+
+  if (m.f && m.f.length) {
+    m.f.forEach(f => {
+      html += `
+        <div class="svg-wrap" id="svg-wrap-${f}">
+          <div class="svg-controls">
+            <span style="font-size:0.9rem;font-weight:700;color:var(--ink);margin-right:auto;">⚡ Schematic: ${Z.names[f] || f}</span>
+            <button class="secondary" style="padding:4px 10px;font-size:0.8rem;" onclick="toggleFlow('${f}')">⚡ Animate Current</button>
+          </div>
+          ${Z.figs[f]}
+        </div>
+      `;
+    });
+  }
+
+  if (m.w && m.w.length) {
+    html += `<h2>Written Practice (Self-Marking)</h2>`;
+    html += m.w.map((w, idx) => `
+      <details class="card">
+        <summary><b>${idx + 1}. ${w[0]}</b></summary>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line);">
+          <p style="color:var(--cold);font-weight:600;margin-bottom:4px;">Expected Answer Scheme:</p>
+          <p>${w[1]}</p>
+        </div>
+      </details>
+    `).join('');
+  }
+
+  html += `
+    <div class="quiz-container">
+      <h2>Module Mastery Test</h2>
+      <p style="color:var(--mut);font-size:0.92rem;">Pass mark is 70%. Answers are shuffled on every attempt.</p>
+      <div id="qz"></div>
+    </div>
+  `;
+
+  html += `
+    <div style="display:flex;justify-content:space-between;margin-top:36px;gap:12px;flex-wrap:wrap;">
+      ${prevMod ? `<a class="btn secondary" href="#/m/${prevMod.id}">← ${prevMod.id.toUpperCase()}</a>` : '<div></div>'}
+      ${nextMod ? `<a class="btn" href="#/m/${nextMod.id}">Next: ${nextMod.id.toUpperCase()} →</a>` : `<a class="btn" href="#/">Finish All Modules ✓</a>`}
+    </div>
+  `;
+
+  app.innerHTML = html;
+  wire(m.x);
+  quiz($('#qz'), m.q, m.id);
+}
+
+window.toggleFlow = (figId) => {
+  const wrap = $(`#svg-wrap-${figId}`);
+  if (wrap) wrap.classList.toggle('flowing');
+  playClick();
+};
+
+function diagram() {
+  const pos = [[220, 20], [20, 20], [20, 150], [220, 150]];
+  return `
+    <h3>Practical: The Cycle Diagram</h3>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 360 230" width="100%" role="img" aria-label="Refrigeration cycle diagram">
+        <g fill="none" stroke-width="4">
+          <path stroke="var(--hot)" d="M220 45H140" marker-end="url(#h)"/>
+          <path stroke="var(--hot)" d="M80 70V150" marker-end="url(#h)"/>
+          <path stroke="var(--cold)" d="M140 175H220" marker-end="url(#c)"/>
+          <path stroke="var(--cold)" d="M280 150V70" marker-end="url(#c)"/>
+        </g>
+        <defs>
+          <marker id="h" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--hot)"/></marker>
+          <marker id="c" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--cold)"/></marker>
+        </defs>
+        ${D.map((d, i) => `<g class="node" tabindex="0" role="button" data-i="${i}" style="cursor:pointer;"><rect x="${pos[i][0]}" y="${pos[i][1]}" width="120" height="50" rx="8" fill="var(--card)" stroke="var(--${d[2] == 'h' ? 'hot' : 'cold'})" stroke-width="3"/><text x="${pos[i][0] + 60}" y="${pos[i][1] + 30}" text-anchor="middle" fill="var(--ink)">${d[0]}</text></g>`).join('')}
+        <text x="180" y="120" text-anchor="middle" style="fill:var(--mut);font-weight:600">Red = high side, blue = low side</text>
+      </svg>
+      <div class="card" id="info" style="margin-top:12px;background:var(--bg-subtle);">Tap any component to learn what it does.</div>
+    </div>
+  `;
+}
+
+function calc() {
+  return `
+    <h3>Practical: Superheat and Subcooling Diagnostic</h3>
+    <div class="card">
+      <p style="color:var(--mut);font-size:0.9rem;">Enter measured saturation temperatures and actual line temperatures in °C:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin:12px 0;">
+        <label>Evaporating Sat. (°C)<br><input type="number" id="a" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:1rem;margin-top:4px;"></label>
+        <label>Suction Line Temp (°C)<br><input type="number" id="b" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:1rem;margin-top:4px;"></label>
+        <label>Condensing Sat. (°C)<br><input type="number" id="c" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:1rem;margin-top:4px;"></label>
+        <label>Liquid Line Temp (°C)<br><input type="number" id="d" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:1rem;margin-top:4px;"></label>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
+        <div class="pill" id="sh" style="padding:8px 16px;font-size:0.95rem;">Superheat: –</div>
+        <div class="pill" id="sc" style="padding:8px 16px;font-size:0.95rem;">Subcooling: –</div>
+      </div>
+      <div id="hint" style="margin-top:12px;font-weight:600;color:var(--cold);"></div>
+    </div>
+  `;
+}
+
+function wire(x) {
+  if (x === 'cycle') {
+    document.querySelectorAll('.node').forEach(n => {
+      const f = () => {
+        playClick();
+        const d = D[n.dataset.i];
+        $('#info').innerHTML = `<b style="color:var(--cold);font-size:1.05rem;">${d[0]}</b><br>${d[1]}`;
+      };
+      n.onclick = f;
+      n.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') f(); };
+    });
+  }
+  if (x === 'calc') {
+    document.querySelectorAll('.card input').forEach(i => i.oninput = () => {
+      const v = k => parseFloat($('#' + k).value);
+      const a = v('a'), b = v('b'), c = v('c'), d = v('d');
+      const sh = b - a, sc = c - d;
+      $('#sh').textContent = isNaN(sh) ? 'Superheat: –' : `Superheat: ${sh.toFixed(1)} K`;
+      $('#sc').textContent = isNaN(sc) ? 'Subcooling: –' : `Subcooling: ${sc.toFixed(1)} K`;
+      let hint = '';
+      if (!isNaN(sh) && sh < 3) hint += '⚠️ Very low superheat: risk of liquid floodback to compressor. ';
+      if (!isNaN(sh) && sh > 15) hint += '⚠️ High superheat: undercharge or TXV restriction. ';
+      if (!isNaN(sc) && sc < 3) hint += '⚠️ Low subcooling: possible refrigerant undercharge. ';
+      if (!isNaN(sc) && sc > 12) hint += '⚠️ High subcooling: possible overcharge. ';
+      $('#hint').textContent = hint;
+    });
+  }
+}
+
+// =====================================================================
+// View 3: Quiz Engine 2.0
+// =====================================================================
+function quiz(el, qs, key, opts) {
+  qs = qs.map(q => {
+    const o = shuffle(q[1].map((t, i) => [t, i === q[2]]));
+    return [q[0], o.map(x => x[0]), o.findIndex(x => x[1]), q[3]];
+  });
+
+  el.innerHTML = qs.map((q, i) => `
+    <div class="q" id="qcard-${i}">
+      <div class="q-header">
+        <span>Question ${i + 1} of ${qs.length}</span>
+      </div>
+      <div class="q-title">${q[0]}</div>
+      <div class="q-options">
+        ${q[1].map((o, j) => `
+          <label class="q-opt" data-q="${i}" data-opt="${j}">
+            <input type="radio" name="q${i}" value="${j}">
+            <span class="opt-badge">${['A', 'B', 'C', 'D'][j] || (j + 1)}</span>
+            <span style="font-weight:600;flex:1;">${o}</span>
+          </label>
+        `).join('')}
+      </div>
+      <div class="why" id="w${i}"></div>
+    </div>
+  `).join('') + `
+    <div class="quiz-footer">
+      <button id="chk" style="padding:14px 28px;font-size:1.05rem;width:100%;">Submit Answers</button>
+      <div id="res"></div>
+    </div>
+  `;
+
+  el.querySelectorAll('.q-opt').forEach(opt => {
+    opt.onclick = () => {
+      playClick();
+      if ('vibrate' in navigator) navigator.vibrate(10);
+      const qIdx = opt.dataset.q;
+      el.querySelectorAll(`[data-q="${qIdx}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    };
+  });
+
+  $('#chk').onclick = () => {
+    let s = 0;
+    qs.forEach((q, i) => {
+      const sel = el.querySelector(`input[name=q${i}]:checked`);
+      const opts = el.querySelectorAll(`[data-q="${i}"]`);
+      opts.forEach((lb, j) => {
+        const inp = lb.querySelector('input');
+        if (inp) inp.disabled = true;
+        if (j === q[2]) lb.classList.add('good');
+        else if (sel && +sel.value === j) lb.classList.add('bad');
+      });
+      if (sel && +sel.value === q[2]) s++;
+      const whyEl = $('#w' + i);
+      if (whyEl) {
+        whyEl.innerHTML = `<b>Key Exam Insight:</b> ${q[3]}`;
+        whyEl.classList.add('show');
+      }
+    });
+
+    const p = Math.round(s / qs.length * 100);
+    const passMark = (opts && opts.pass) || 70;
+    const passed = p >= passMark;
+
+    if (best(key) == null || p > best(key)) {
+      P[key] = p;
+      save();
+    }
+
+    if (passed) {
+      fireConfetti();
+      playVictory();
+    }
+
+    const retakeUrl = (opts && opts.retake) ? opts.retake : `#/${key.startsWith('exam') ? 'exam' + (key.length > 4 ? '/' + key.slice(4) : '') : 'm/' + key}`;
+
+    $('#res').innerHTML = `
+      <div class="score-card ${passed ? '' : 'fail'}">
+        <span class="pill ${passed ? 'ok' : 'warn'}" style="font-size:0.9rem;">${passed ? '🎉 Passed' : '⚠️ Below ' + passMark + '%'}</span>
+        <div class="score-num">${p}%</div>
+        <p style="font-size:1.05rem;color:var(--ink-secondary);margin:4px 0 16px;">
+          You answered <b>${s} of ${qs.length}</b> questions correctly.
+          ${passed ? 'Excellent work! You meet the ' + ((opts && opts.bench) || 'NVTI Certificate') + ' benchmark.' : 'Review the study notes and practical schematics, then try again.'}
+        </p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <a class="btn" href="${retakeUrl}" onclick="setTimeout(route)">🔄 Retake Quiz</a>
+          <button class="secondary" onclick="filterReviewWrong()">🔍 Review Incorrect Only</button>
+        </div>
+      </div>
+    `;
+
+    $('#chk').remove();
+    $('#res').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+}
+
+window.filterReviewWrong = () => {
+  $$('.q').forEach(q => {
+    const isBad = q.querySelector('.q-opt.bad');
+    q.style.display = isBad ? 'block' : 'none';
+  });
+};
+
+// =====================================================================
+// View 4: Timed Mock Exam with Floating HUD
+// =====================================================================
+function exam(k) {
+  updateActiveNav('home');
+  const all = M.filter(m => k ? m.id.startsWith(k) : !isCG(m)).flatMap(m => m.q);
+  const examTitle = k === 'e2' ? 'NVTI Certificate Two Mock Exam' :
+                    k === 'int' ? 'International Standards Practice Exam' :
+                    k === 'adv' ? 'Advanced Systems Practice Exam' : 'NVTI Certificate One Mock Exam';
+
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Dashboard</a> / <span>Mock Exam</span></div>
+    <h1>${examTitle}</h1>
+    <p style="color:var(--mut);">25 questions drawn at random from all relevant modules. Pass mark: 70%. Time allowed: 30 minutes.</p>
+
+    <div class="exam-hud" id="exam-hud">
+      <div class="timer-box" id="tm-box">
+        <span>⏱️</span>
+        <span id="tm-val">30:00</span>
+      </div>
+      <div style="font-size:0.85rem;font-weight:700;color:var(--mut);">
+        Pass Mark: <span style="color:var(--ok);">70%</span>
+      </div>
+    </div>
+
+    <div id="qz"></div>
+  `;
+
+  quiz($('#qz'), shuffle(all).slice(0, 25), 'exam' + (k || ''));
+
+  let t = 1800;
+  const updateTimer = () => {
+    const mins = Math.floor(t / 60);
+    const secs = String(t % 60).padStart(2, '0');
+    const el = $('#tm-val');
+    if (el) el.textContent = `${mins}:${secs}`;
+    const box = $('#tm-box');
+    if (box && t < 300) box.classList.add('urgent');
+  };
+
+  updateTimer();
+  window.T = setInterval(() => {
+    t--;
+    updateTimer();
+    if (t <= 0) {
+      clearInterval(T);
+      const b = $('#chk');
+      if (b) b.click();
+    }
+  }, 1000);
+}
+
+// =====================================================================
+// View 5: Practical Job Sheets & Instructor Sign-Off
+// =====================================================================
+function jobs() {
+  updateActiveNav('jobs');
+  let html = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Practical Jobs</span></div>
+    <h1>Practical Workshop Job Sheets</h1>
+    <p style="color:var(--mut);">Complete each workshop task under instructor supervision. Check off each step once completed and signed off.</p>
+  `;
+
+  html += Y.jobs.map((j, i) => {
+    const st = ((P.j || {})[i] || []);
+    const d = st.filter(Boolean).length;
+    const isDone = d === j.steps.length;
+    const isSigned = !!(P.sig && P.sig[i]);
+    return `
+      <a class="card" href="#/job/${i}">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <b style="font-size:1.05rem;">${j.t}</b>
+            <div style="font-size:0.84rem;color:var(--mut);margin-top:4px;">
+              <b>Tools:</b> ${j.tools}
+            </div>
+            ${isSigned ? `<span class="pill ok" style="margin-top:6px;font-size:0.75rem;">Verified by Instructor ✓</span>` : ''}
+          </div>
+          <span class="pill ${isDone ? 'ok' : ''}">${d}/${j.steps.length} Steps</span>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  app.innerHTML = html;
+}
+
+function job(i) {
+  updateActiveNav('jobs');
+  const j = Y.jobs[i];
+  if (!j) return jobs();
+  const st = (P.j || {})[i] || [];
+  const isSigned = !!(P.sig && P.sig[i]);
+
+  let html = `
+    <div class="breadcrumb"><a href="#/jobs">← Job Sheets</a> / <span>Job #${i + 1}</span></div>
+    <h1>${j.t}</h1>
+    <div class="note"><b>Safety First:</b> Isolate supply, lock and tag out, wear PPE, and obtain instructor sign-off before testing.</div>
+    <div class="card" style="margin-bottom:20px;">
+      <b>Required Tools & Materials:</b>
+      <p style="margin-top:6px;color:var(--ink-secondary);">${j.tools}</p>
+    </div>
+    <h2>Step-by-Step Practical Checklist</h2>
+    <div class="card" style="padding:10px 16px;">
+  `;
+
+  html += j.steps.map((x, k) => `
+    <label class="job-step ${st[k] ? 'done' : ''}" data-step="${k}">
+      <input type="checkbox" data-k="${k}" ${st[k] ? 'checked' : ''}>
+      <span style="flex:1;"><b>Step ${k + 1}:</b> ${x}</span>
+    </label>
+  `).join('');
+
+  html += `
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
+      <a class="btn secondary" href="#/jobs">← Back to Jobs</a>
+      <span class="pill ok" id="job-status-pill">${st.filter(Boolean).length} / ${j.steps.length} Completed</span>
+    </div>
+
+    <div class="instructor-sign-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <b style="color:var(--cu);font-size:1.05rem;">👨‍🏫 Workshop Instructor Verification & Sign-Off</b>
+        ${isSigned ? `<span class="pill ok">Official Sign-Off Recorded ✓</span>` : ''}
+      </div>
+      <p style="font-size:0.86rem;color:var(--ink-secondary);margin-bottom:8px;">
+        Instructor signature verifies safe workmanship, correct terminations, and neat conduit/cable dress.
+      </p>
+      ${isSigned ? `
+        <div style="text-align:center;padding:12px;background:var(--card);border-radius:var(--radius-sm);margin-top:10px;">
+          <img src="${P.sig[i]}" alt="Instructor Signature" style="max-height:60px;margin-bottom:4px;">
+          <div style="font-size:0.8rem;color:var(--ok);font-weight:700;">Task Certified & Signed Off</div>
+        </div>
+      ` : `
+        <canvas class="sig-pad" id="sig-pad-${i}"></canvas>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button class="secondary" style="font-size:0.82rem;padding:6px 12px;" onclick="clearSig(${i})">Clear Signature</button>
+          <button style="font-size:0.82rem;padding:6px 14px;" onclick="saveSig(${i})">Save Instructor Stamp</button>
+        </div>
+      `}
+    </div>
+  `;
+
+  app.innerHTML = html;
+
+  if (!isSigned) initSigPad(i);
+
+  document.querySelectorAll('input[data-k]').forEach(c => {
+    c.onchange = () => {
+      playClick();
+      P.j = P.j || {};
+      const a = P.j[i] || [];
+      a[+c.dataset.k] = c.checked;
+      P.j[i] = a;
+      save();
+      const parent = c.closest('.job-step');
+      if (parent) parent.classList.toggle('done', c.checked);
+      const d = a.filter(Boolean).length;
+      $('#job-status-pill').textContent = `${d} / ${j.steps.length} Completed`;
+      if (d === j.steps.length) {
+        fireConfetti();
+        playVictory();
+      }
+    };
+  });
+}
+
+function initSigPad(jobIdx) {
+  const c = document.getElementById('sig-pad-' + jobIdx);
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  c.width = c.offsetWidth || 360;
+  c.height = 110;
+  let drawing = false;
+
+  const getPos = e => {
+    const r = c.getBoundingClientRect();
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: cx - r.left, y: cy - r.top };
+  };
+
+  const start = e => {
+    drawing = true;
+    const p = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.strokeStyle = '#0284c7';
+    ctx.lineWidth = 2.5;
+  };
+  const move = e => {
+    if (!drawing) return;
+    const p = getPos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  };
+  const stop = () => { drawing = false; };
+
+  c.addEventListener('mousedown', start);
+  c.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', stop);
+
+  c.addEventListener('touchstart', e => { e.preventDefault(); start(e); }, { passive: false });
+  c.addEventListener('touchmove', e => { e.preventDefault(); move(e); }, { passive: false });
+  c.addEventListener('touchend', stop);
+}
+
+window.clearSig = idx => {
+  const c = document.getElementById('sig-pad-' + idx);
+  if (c) c.getContext('2d').clearRect(0, 0, c.width, c.height);
+};
+
+window.saveSig = idx => {
+  const c = document.getElementById('sig-pad-' + idx);
+  if (!c) return;
+  P.sig = P.sig || {};
+  P.sig[idx] = c.toDataURL();
+  save();
+  fireConfetti();
+  playVictory();
+  job(idx);
+};
+
+// =====================================================================
+// View 6: Trade Drawing Lab
+// =====================================================================
+function draw() {
+  updateActiveNav('draw');
+  let html = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Drawing Lab</span></div>
+    <h1>Trade Drawing & Schematics Lab</h1>
+    <p style="color:var(--mut);">Study each diagram, hide it, sketch from memory on the canvas pad or paper, then self-mark against the grading points.</p>
+  `;
+
+  html += Object.keys(Z.figs).map(k => {
+    const mk = (Z.marks || {})[k] || [];
+    const st = ((P.d || {})[k]) || [];
+    return `
+      <div class="draw-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <b style="font-size:1.15rem;">${Z.names[k]}</b>
+          <button class="secondary" style="padding:6px 14px;" data-h="${k}">Hide Blueprint</button>
+        </div>
+
+        <div data-fig="${k}" class="svg-wrap" style="margin:0 0 14px;">${Z.figs[k]}</div>
+        <p><b>NVTI Exam Task:</b> ${Z.tasks[k]}</p>
+
+        <div class="canvas-toolbar">
+          <span style="font-size:0.85rem;font-weight:700;color:var(--mut);">Digital Sketchpad:</span>
+          <button class="secondary" style="padding:4px 10px;font-size:0.8rem;" onclick="clearCanvas('${k}')">🧹 Clear</button>
+          <button class="secondary" style="padding:4px 10px;font-size:0.8rem;" onclick="toggleGhost('${k}')">🪟 Toggle Guide</button>
+        </div>
+        <div class="canvas-container" id="cc-${k}">
+          <canvas class="sketch-canvas" id="canvas-${k}" width="600" height="260"></canvas>
+        </div>
+
+        ${mk.length ? `
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <b>Self-Marking Checklist</b>
+              <span class="pill" id="sc-${k}">0/${mk.length}</span>
+            </div>
+            ${mk.map((x, i) => `
+              <label style="display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer;">
+                <input type="checkbox" data-d="${k}" data-i="${i}" ${st[i] ? 'checked' : ''}>
+                <span>${x}</span>
+              </label>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = html;
+  Object.keys(Z.figs).forEach(initCanvas);
+
+  const sc = k => {
+    const m = (Z.marks || {})[k] || [];
+    const st = ((P.d || {})[k]) || [];
+    const n = m.filter((x, i) => st[i]).length;
+    const e = $('#sc-' + k);
+    if (e) {
+      e.textContent = `${n}/${m.length} Marks`;
+      e.className = `pill ${n === m.length ? 'ok' : ''}`;
+    }
+  };
+
+  Object.keys(Z.figs).forEach(sc);
+
+  document.querySelectorAll('[data-h]').forEach(b => b.onclick = () => {
+    playClick();
+    const d = document.querySelector(`[data-fig="${b.dataset.h}"]`);
+    const isHidden = d.style.display === 'none';
+    d.style.display = isHidden ? '' : 'none';
+    b.textContent = isHidden ? 'Hide Blueprint' : 'Show Blueprint';
+  });
+
+  document.querySelectorAll('[data-d]').forEach(c => c.onchange = () => {
+    playClick();
+    P.d = P.d || {};
+    const a = P.d[c.dataset.d] || [];
+    a[+c.dataset.i] = c.checked;
+    P.d[c.dataset.d] = a;
+    save();
+    sc(c.dataset.d);
+  });
+}
+
+function initCanvas(k) {
+  const c = document.getElementById('canvas-' + k);
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let drawing = false;
+
+  const getPos = e => {
+    const r = c.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: (clientX - r.left) * (c.width / r.width),
+      y: (clientY - r.top) * (c.height / r.height)
+    };
+  };
+
+  const start = e => {
+    drawing = true;
+    const p = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.strokeStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#38bdf8' : '#0284c7';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  };
+
+  const move = e => {
+    if (!drawing) return;
+    const p = getPos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  };
+
+  const stop = () => { drawing = false; };
+
+  c.addEventListener('mousedown', start);
+  c.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', stop);
+
+  c.addEventListener('touchstart', e => { e.preventDefault(); start(e); }, { passive: false });
+  c.addEventListener('touchmove', e => { e.preventDefault(); move(e); }, { passive: false });
+  c.addEventListener('touchend', stop);
+}
+
+window.clearCanvas = k => {
+  const c = document.getElementById('canvas-' + k);
+  if (c) c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  playClick();
+};
+
+window.toggleGhost = k => {
+  const fig = document.querySelector(`[data-fig="${k}"]`);
+  if (!fig) return;
+  fig.style.display = '';
+  fig.style.opacity = fig.style.opacity === '0.25' ? '1' : '0.25';
+  playClick();
+};
+
+// =====================================================================
+// View 7: Virtual Electrical Simulators Bench (#/sims)
+// =====================================================================
+let swA = 0;
+let swB = 0;
+
+function sims() {
+  updateActiveNav('sims');
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Virtual Bench</span></div>
+    <h1>⚡ Virtual Electrical Simulators</h1>
+    <p style="color:var(--mut);">Hands-on virtual circuits and safety sequencer. Click switches to test live current flow and master the 6-step safe isolation procedure.</p>
+    <div class="card" style="margin-bottom:20px;border-left:5px solid var(--cu);">
+      <h2 style="margin:0 0 4px;">🏠 House Wiring Practice</h2>
+      <p style="color:var(--mut);margin:0 0 8px;font-size:.92rem;">Choose the number of rooms, place lights, switches, sockets and appliances, draw and terminate the cables, set up the consumer unit, then switch on. See faults, RCD and MCB trips as they happen in real life.</p>
+      <a href="#/house"><button>Open the house wiring practice ➜</button></a>
+    </div>
+
+    <!-- Simulator 1: Two-Way Switching Circuit -->
+    <div class="card" style="margin-bottom:28px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="margin:0;">1. Two-Way Switching Simulator</h2>
+        <span class="pill ok" id="lamp-state-pill">Lamp: ON</span>
+      </div>
+      <p style="color:var(--mut);font-size:0.9rem;margin-top:4px;">Toggle Switch A or Switch B below. Notice how either switch can turn the lamp on or off.</p>
+
+      <div class="svg-wrap" style="text-align:center;" id="twoway-svg-wrap">
+        <svg viewBox="0 0 520 240" width="100%" style="max-width:560px;" role="img" aria-label="Two-way switching simulator with COM, L1 and L2 terminals on each switch">
+          <text x="14" y="30" font-weight="700">230V L</text>
+          <path d="M64 25 H 95 V 110 H 125" stroke="var(--cu)" stroke-width="3" fill="none"/>
+          <text x="14" y="214" font-weight="700">Neutral N</text>
+          <path d="M84 210 H 450 V 156" stroke="var(--cold)" stroke-width="3" fill="none"/>
+
+          <rect x="110" y="60" width="90" height="100" rx="8" fill="var(--bg-subtle)" stroke="var(--line-strong)" stroke-width="2"/>
+          <text x="155" y="48" text-anchor="middle" font-weight="700">Switch A</text>
+          <circle cx="125" cy="110" r="5" fill="var(--cu)"/>
+          <circle id="term-a1" cx="190" cy="80" r="5" fill="var(--ink)"/>
+          <circle id="term-a2" cx="190" cy="140" r="5" fill="var(--ink)"/>
+          <text x="125" y="134" text-anchor="middle" font-size="11" font-weight="700">COM</text>
+          <text x="190" y="73" text-anchor="middle" font-size="11" font-weight="700">L1</text>
+          <text x="190" y="156" text-anchor="middle" font-size="11" font-weight="700">L2</text>
+          <path id="blade-a" d="M125 110 L 190 80" stroke="var(--cu)" stroke-width="4" stroke-linecap="round"/>
+          <text id="pos-a" x="155" y="180" text-anchor="middle" font-size="11" fill="var(--mut)">COM to L1</text>
+
+          <path id="strap-1" d="M190 80 H 330" stroke="var(--ink)" stroke-width="3" fill="none"/>
+          <text x="260" y="70" text-anchor="middle" font-size="11" fill="var(--mut)">Strapper 1 (L1 to L1)</text>
+          <path id="strap-2" d="M190 140 H 330" stroke="var(--ink)" stroke-width="3" fill="none"/>
+          <text x="260" y="158" text-anchor="middle" font-size="11" fill="var(--mut)">Strapper 2 (L2 to L2)</text>
+
+          <rect x="320" y="60" width="90" height="100" rx="8" fill="var(--bg-subtle)" stroke="var(--line-strong)" stroke-width="2"/>
+          <text x="365" y="48" text-anchor="middle" font-weight="700">Switch B</text>
+          <circle id="term-b1" cx="330" cy="80" r="5" fill="var(--ink)"/>
+          <circle id="term-b2" cx="330" cy="140" r="5" fill="var(--ink)"/>
+          <circle cx="395" cy="110" r="5" fill="var(--cu)"/>
+          <text x="330" y="73" text-anchor="middle" font-size="11" font-weight="700">L1</text>
+          <text x="330" y="156" text-anchor="middle" font-size="11" font-weight="700">L2</text>
+          <text x="395" y="134" text-anchor="middle" font-size="11" font-weight="700">COM</text>
+          <path id="blade-b" d="M395 110 L 330 80" stroke="var(--cu)" stroke-width="4" stroke-linecap="round"/>
+          <text id="pos-b" x="365" y="180" text-anchor="middle" font-size="11" fill="var(--mut)">COM to L1</text>
+
+          <path id="feed-lamp" d="M395 110 H 450 V 124" stroke="var(--ink)" stroke-width="3" fill="none"/>
+
+          <circle id="lamp-circle" cx="450" cy="140" r="16" fill="#facc15" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M439 129 L 461 151 M461 129 L 439 151" stroke="var(--ink)" stroke-width="2"/>
+          <text x="492" y="144" text-anchor="middle" font-weight="700">Lamp</text>
+        </svg>
+      </div>
+
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px;">
+        <button onclick="toggleSwitchA()">Toggle Switch A</button>
+        <button onclick="toggleSwitchB()">Toggle Switch B</button>
+      </div>
+      <div id="sim-status-banner" style="margin-top:14px;padding:12px;border-radius:8px;background:var(--ok-subtle);color:var(--ok);font-weight:700;text-align:center;">
+        ⚡ Circuit Closed via Strapper 1 (L1 to L1): Lamp is Energised (230V).
+      </div>
+    </div>
+
+    <!-- Simulator 2: Safe Isolation Sequence Simulator -->
+    <div class="card">
+      <h2>2. Safe Isolation Protocol Sequencer</h2>
+      <p style="color:var(--mut);font-size:0.9rem;">
+        Arrange the 6 vital steps of safe isolation in the strictly required sequence. Click each step in order.
+      </p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+        <div>
+          <b>Step Pool (Click in correct order):</b>
+          <div id="iso-pool" style="display:flex;flex-direction:column;gap:8px;margin-top:8px;"></div>
+        </div>
+        <div>
+          <b>Your Sequence (1 to 6):</b>
+          <div id="iso-seq" style="display:flex;flex-direction:column;gap:8px;margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px;">
+        <button class="secondary" onclick="resetIsoSeq()">Reset Sequence</button>
+        <button onclick="checkIsoSeq()">Verify Safety Protocol</button>
+      </div>
+      <div id="iso-res" style="margin-top:14px;"></div>
+    </div>
+  `;
+
+  renderTwoWay();
+  initIsoSequencer();
+  if (window.Bench) Bench.mount(app);
+}
+
+window.toggleSwitchA = () => {
+  swA = swA === 0 ? 1 : 0;
+  playClick();
+  renderTwoWay();
+};
+
+window.toggleSwitchB = () => {
+  swB = swB === 0 ? 1 : 0;
+  playClick();
+  renderTwoWay();
+};
+
+function renderTwoWay() {
+  const isClosed = swA === swB;
+  const bladeA = $('#blade-a');
+  const bladeB = $('#blade-b');
+  const lamp = $('#lamp-circle');
+  const pill = $('#lamp-state-pill');
+  const banner = $('#sim-status-banner');
+  const feed = $('#feed-lamp');
+  const strap1 = $('#strap-1');
+  const strap2 = $('#strap-2');
+
+  if (bladeA) bladeA.setAttribute('d', swA === 0 ? 'M125 110 L 190 80' : 'M125 110 L 190 140');
+  if (bladeB) bladeB.setAttribute('d', swB === 0 ? 'M395 110 L 330 80' : 'M395 110 L 330 140');
+  const lbl = v => v === 0 ? 'COM to L1' : 'COM to L2';
+  if ($('#pos-a')) $('#pos-a').textContent = lbl(swA);
+  if ($('#pos-b')) $('#pos-b').textContent = lbl(swB);
+  // the strapper fed by Switch A's selected terminal is live, so the matching terminal on Switch B is live too
+  const live = '#d97706', off = 'var(--ink)';
+  [['#term-a1', swA === 0], ['#term-a2', swA === 1], ['#term-b1', swA === 0], ['#term-b2', swA === 1]].forEach(([id, on]) => { const t = $(id); if (t) t.setAttribute('fill', on ? live : off); });
+
+  if (isClosed) {
+    if (lamp) lamp.setAttribute('fill', '#facc15');
+    if (pill) { pill.textContent = 'Lamp: ON'; pill.className = 'pill ok'; }
+    if (feed) feed.setAttribute('stroke', '#d97706');
+    if (strap1) strap1.setAttribute('stroke', swA === 0 ? '#d97706' : 'var(--ink)');
+    if (strap2) strap2.setAttribute('stroke', swA === 1 ? '#d97706' : 'var(--ink)');
+    if (banner) {
+      banner.style.background = 'var(--ok-subtle)';
+      banner.style.color = 'var(--ok)';
+      banner.textContent = `⚡ Circuit Closed via Strapper ${swA + 1} (L${swA + 1} to L${swA + 1}): Lamp is Energised (230V).`;
+    }
+  } else {
+    if (lamp) lamp.setAttribute('fill', 'var(--bg-subtle)');
+    if (pill) { pill.textContent = 'Lamp: OFF'; pill.className = 'pill'; }
+    if (feed) feed.setAttribute('stroke', 'var(--ink)');
+    if (strap1) strap1.setAttribute('stroke', swA === 0 ? '#d97706' : 'var(--ink)');
+    if (strap2) strap2.setAttribute('stroke', swA === 1 ? '#d97706' : 'var(--ink)');
+    if (banner) {
+      banner.style.background = 'var(--bg-subtle)';
+      banner.style.color = 'var(--mut)';
+      banner.textContent = `⭕ Circuit Open: Switch A uses L${swA + 1} but Switch B uses L${swB + 1}, so the lamp is de-energised (0V).`;
+    }
+  }
+}
+
+const isoSteps = [
+  { id: 1, text: 'Identify the circuit or equipment to be worked on' },
+  { id: 2, text: 'Isolate the supply at the main switch or isolator' },
+  { id: 3, text: 'Secure isolation with Lock-Out & Danger Tag (LOTO)' },
+  { id: 4, text: 'Prove two-pole voltage tester on a known live source or proving unit' },
+  { id: 5, text: 'Test between all conductors (L-N, L-E, N-E) to confirm DEAD' },
+  { id: 6, text: 'Re-prove voltage tester on the known live source to verify tester is intact' }
+];
+
+let userIsoSeq = [];
+let availableIsoSteps = [];
+
+function initIsoSequencer() {
+  userIsoSeq = [];
+  availableIsoSteps = shuffle(isoSteps.slice());
+  renderIsoUI();
+}
+
+window.resetIsoSeq = initIsoSequencer;
+
+function renderIsoUI() {
+  const pool = $('#iso-pool');
+  const seq = $('#iso-seq');
+  if (!pool || !seq) return;
+
+  pool.innerHTML = availableIsoSteps.map(s => `
+    <button class="secondary" style="text-align:left;font-size:0.85rem;padding:8px 12px;" onclick="addIsoStep(${s.id})">
+      ➕ ${s.text}
+    </button>
+  `).join('') || '<p style="color:var(--mut);font-size:0.85rem;">All steps selected.</p>';
+
+  seq.innerHTML = userIsoSeq.map((s, i) => `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-subtle);border:1px solid var(--line);border-radius:6px;font-size:0.85rem;">
+      <span class="pill" style="min-width:24px;text-align:center;">${i + 1}</span>
+      <span style="flex:1;">${s.text}</span>
+    </div>
+  `).join('') || '<p style="color:var(--mut);font-size:0.85rem;">Click steps on the left to sequence.</p>';
+}
+
+window.addIsoStep = id => {
+  const step = availableIsoSteps.find(s => s.id === id);
+  if (!step) return;
+  playClick();
+  userIsoSeq.push(step);
+  availableIsoSteps = availableIsoSteps.filter(s => s.id !== id);
+  renderIsoUI();
+};
+
+window.checkIsoSeq = () => {
+  const res = $('#iso-res');
+  if (userIsoSeq.length < 6) {
+    res.innerHTML = `<div class="note" style="border-color:var(--hot);background:var(--hot-subtle);">Please place all 6 steps before verifying.</div>`;
+    return;
+  }
+
+  let correct = true;
+  for (let i = 0; i < 6; i++) {
+    if (userIsoSeq[i].id !== i + 1) { correct = false; break; }
+  }
+
+  if (correct) {
+    fireConfetti();
+    playVictory();
+    res.innerHTML = `
+      <div class="note" style="border-color:var(--ok);background:var(--ok-subtle);color:var(--ok);font-weight:700;">
+        🎉 Flawless! You have mastered the NVTI & International Safe Isolation Protocol. Ready for workshop safety assessment!
+      </div>
+    `;
+  } else {
+    playTone(200, 'sawtooth', 0.25, 0.1);
+    let critique = 'Safety sequencing error detected. Remember: ';
+    const testIdx = userIsoSeq.findIndex(s => s.id === 5);
+    const proveBefore = userIsoSeq.findIndex(s => s.id === 4);
+    if (testIdx < proveBefore) critique += 'You CANNOT test conductors dead before proving your tester on a known source first! ';
+    const reprove = userIsoSeq.findIndex(s => s.id === 6);
+    if (reprove !== 5) critique += 'You must always re-prove your tester as the very last step. ';
+    res.innerHTML = `<div class="note" style="border-color:var(--hot);background:var(--hot-subtle);color:var(--hot);font-weight:700;">⚠️ ${critique}</div>`;
+  }
+};
+
+// =====================================================================
+// View 8: Electrician's Pocket Toolkit (#/tools)
+// =====================================================================
+function tools() {
+  updateActiveNav('tools');
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Toolkit</span></div>
+    <h1>🧮 Electrician's Pocket Toolkit</h1>
+    <p style="color:var(--mut);">Essential workshop & site trade calculation tools aligned with BS 7671 and NVTI standards.</p>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h2>1. Ohm's Law & Power Wheel (V, I, R, P)</h2>
+      <p style="font-size:0.86rem;color:var(--mut);">Enter any TWO values to solve the other two:</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;margin:14px 0;">
+        <label>Voltage V (Volts)<br><input type="number" id="ow-v" placeholder="e.g. 230" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Current I (Amps)<br><input type="number" id="ow-i" placeholder="e.g. 10" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Resistance R (Ohms)<br><input type="number" id="ow-r" placeholder="e.g. 23" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Power P (Watts)<br><input type="number" id="ow-p" placeholder="e.g. 2300" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button class="secondary" onclick="clearOhm()">Clear</button>
+        <button onclick="calcOhm()">Calculate</button>
+      </div>
+      <div id="ow-res" style="margin-top:12px;font-family:var(--font-mono);font-size:0.95rem;"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h2>2. Cable Sizing & Permissible Voltage Drop</h2>
+      <p style="font-size:0.86rem;color:var(--mut);">Vd = (mV/A/m × I × L) ÷ 1000. Verified against 3% lighting and 5% power limits.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;margin:14px 0;">
+        <label>Supply Voltage<br>
+          <select id="vd-v" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="230">Single Phase (230 V)</option>
+            <option value="400">Three Phase (400 V)</option>
+          </select>
+        </label>
+        <label>Cable Run Length (metres)<br><input type="number" id="vd-l" value="25" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Design Current Ib (Amperes)<br><input type="number" id="vd-i" value="16" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Cable Size (mm²)<br>
+          <select id="vd-size" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="44">1.0 mm² (44 mV/A/m)</option>
+            <option value="29">1.5 mm² (29 mV/A/m)</option>
+            <option value="18" selected>2.5 mm² (18 mV/A/m)</option>
+            <option value="11">4.0 mm² (11 mV/A/m)</option>
+            <option value="7.3">6.0 mm² (7.3 mV/A/m)</option>
+            <option value="4.4">10.0 mm² (4.4 mV/A/m)</option>
+            <option value="2.8">16.0 mm² (2.8 mV/A/m)</option>
+          </select>
+        </label>
+        <label>Circuit Category<br>
+          <select id="vd-cat" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="3">Lighting (Max 3% / 6.9V)</option>
+            <option value="5" selected>Power / Sockets (Max 5% / 11.5V)</option>
+          </select>
+        </label>
+      </div>
+      <button onclick="calcVd()">Calculate Voltage Drop</button>
+      <div id="vd-res" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h2>3. Conduit Space Factor Calculator (40% Limit)</h2>
+      <p style="font-size:0.86rem;color:var(--mut);">Ensures conductors do not exceed 40% fill factor for safe drawing-in without insulation strain.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;margin:14px 0;">
+        <label>Conduit Size<br>
+          <select id="cs-size" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="290">16 mm Conduit (Factor 290)</option>
+            <option value="460" selected>20 mm Conduit (Factor 460)</option>
+            <option value="800">25 mm Conduit (Factor 800)</option>
+            <option value="1400">32 mm Conduit (Factor 1400)</option>
+          </select>
+        </label>
+        <label>Number of 1.5 mm² cables<br><input type="number" id="cs-15" value="2" min="0" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Number of 2.5 mm² cables<br><input type="number" id="cs-25" value="3" min="0" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+        <label>Number of 4.0 mm² cables<br><input type="number" id="cs-40" value="0" min="0" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);"></label>
+      </div>
+      <button onclick="calcConduit()">Check Space Factor</button>
+      <div id="cs-res" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="card">
+      <h2>4. Resistor Color Code Decoder (4-Band)</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:12px;margin:14px 0;">
+        <label>1st Band<br>
+          <select id="rc-b1" onchange="calcResistor()" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="1" style="background:#8b5a2b;color:#fff;">Brown (1)</option>
+            <option value="2" style="background:#ef4444;color:#fff;">Red (2)</option>
+            <option value="3" style="background:#f97316;color:#fff;">Orange (3)</option>
+            <option value="4" style="background:#eab308;color:#000;" selected>Yellow (4)</option>
+            <option value="5" style="background:#22c55e;color:#fff;">Green (5)</option>
+            <option value="6" style="background:#3b82f6;color:#fff;">Blue (6)</option>
+            <option value="7" style="background:#a855f7;color:#fff;">Violet (7)</option>
+          </select>
+        </label>
+        <label>2nd Band<br>
+          <select id="rc-b2" onchange="calcResistor()" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="0" style="background:#000;color:#fff;">Black (0)</option>
+            <option value="1" style="background:#8b5a2b;color:#fff;">Brown (1)</option>
+            <option value="2" style="background:#ef4444;color:#fff;">Red (2)</option>
+            <option value="7" style="background:#a855f7;color:#fff;" selected>Violet (7)</option>
+          </select>
+        </label>
+        <label>Multiplier<br>
+          <select id="rc-m" onchange="calcResistor()" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="1">Black (×1)</option>
+            <option value="10">Brown (×10)</option>
+            <option value="100" selected>Red (×100)</option>
+            <option value="1000">Orange (×1k)</option>
+            <option value="10000">Yellow (×10k)</option>
+          </select>
+        </label>
+        <label>Tolerance<br>
+          <select id="rc-t" onchange="calcResistor()" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);">
+            <option value="5" selected>Gold (±5%)</option>
+            <option value="10">Silver (±10%)</option>
+            <option value="1">Brown (±1%)</option>
+          </select>
+        </label>
+      </div>
+      <div id="rc-res" style="font-size:1.3rem;font-weight:800;color:var(--cold);font-family:var(--font-mono);margin-top:12px;"></div>
+    </div>
+  `;
+
+  calcResistor();
+}
+
+window.clearOhm = () => {
+  ['ow-v', 'ow-i', 'ow-r', 'ow-p'].forEach(id => $('#' + id).value = '');
+  $('#ow-res').innerHTML = '';
+};
+
+window.calcOhm = () => {
+  let v = parseFloat($('#ow-v').value);
+  let i = parseFloat($('#ow-i').value);
+  let r = parseFloat($('#ow-r').value);
+  let p = parseFloat($('#ow-p').value);
+
+  const count = [v, i, r, p].filter(x => !isNaN(x)).length;
+  if (count < 2) {
+    $('#ow-res').innerHTML = `<span style="color:var(--hot);">Please input at least 2 values to calculate.</span>`;
+    return;
+  }
+
+  if (!isNaN(v) && !isNaN(i)) { r = v / i; p = v * i; }
+  else if (!isNaN(v) && !isNaN(r)) { i = v / r; p = (v * v) / r; }
+  else if (!isNaN(v) && !isNaN(p)) { i = p / v; r = (v * v) / p; }
+  else if (!isNaN(i) && !isNaN(r)) { v = i * r; p = (i * i) * r; }
+  else if (!isNaN(i) && !isNaN(p)) { v = p / i; r = p / (i * i); }
+  else if (!isNaN(r) && !isNaN(p)) { v = Math.sqrt(p * r); i = Math.sqrt(p / r); }
+
+  $('#ow-v').value = v.toFixed(2);
+  $('#ow-i').value = i.toFixed(2);
+  $('#ow-r').value = r.toFixed(2);
+  $('#ow-p').value = p.toFixed(2);
+
+  $('#ow-res').innerHTML = `
+    <div style="background:var(--bg-subtle);padding:12px;border-radius:8px;border-left:3px solid var(--cold);">
+      <b>Solution:</b> Voltage: <b>${v.toFixed(2)} V</b> | Current: <b>${i.toFixed(2)} A</b> | Resistance: <b>${r.toFixed(2)} Ω</b> | Power: <b>${p.toFixed(2)} W</b>
+    </div>
+  `;
+  playClick();
+};
+
+window.calcVd = () => {
+  const v = parseFloat($('#vd-v').value);
+  const l = parseFloat($('#vd-l').value);
+  const i = parseFloat($('#vd-i').value);
+  const mv = parseFloat($('#vd-size').value);
+  const lim = parseFloat($('#vd-cat').value);
+
+  const vd = (mv * i * l) / 1000;
+  const pct = (vd / v) * 100;
+  const maxVd = (lim / 100) * v;
+  const pass = vd <= maxVd;
+
+  $('#vd-res').innerHTML = `
+    <div class="note" style="border-color:${pass ? 'var(--ok)' : 'var(--hot)'};background:${pass ? 'var(--ok-subtle)' : 'var(--hot-subtle)'};">
+      <div style="font-size:1.1rem;font-weight:800;color:${pass ? 'var(--ok)' : 'var(--hot)'};">
+        ${pass ? 'COMPLIANT WITH REGULATIONS ✓' : 'NON-COMPLIANT: EXCESSIVE VOLTAGE DROP ⚠️'}
+      </div>
+      <div style="margin-top:6px;font-size:0.92rem;color:var(--ink);">
+        Calculated Voltage Drop: <b>${vd.toFixed(2)} V (${pct.toFixed(2)}%)</b><br>
+        Permitted Max (${lim}% limit): <b>${maxVd.toFixed(2)} V</b><br>
+        ${pass ? 'Conductor size is adequate for this run length.' : 'Increase cable size to the next standard gauge (e.g. 4.0 mm² or 6.0 mm²) to lower resistance.'}
+      </div>
+    </div>
+  `;
+  playClick();
+};
+
+window.calcConduit = () => {
+  const cap = parseFloat($('#cs-size').value);
+  const c15 = parseInt($('#cs-15').value || '0', 10);
+  const c25 = parseInt($('#cs-25').value || '0', 10);
+  const c40 = parseInt($('#cs-40').value || '0', 10);
+
+  const load = (c15 * 31) + (c25 * 43) + (c40 * 58);
+  const pct = Math.round((load / cap) * 100);
+  const pass = load <= cap;
+
+  $('#cs-res').innerHTML = `
+    <div class="note" style="border-color:${pass ? 'var(--ok)' : 'var(--hot)'};background:${pass ? 'var(--ok-subtle)' : 'var(--hot-subtle)'};">
+      <div style="font-weight:800;color:${pass ? 'var(--ok)' : 'var(--hot)'};">
+        Conduit Capacity: ${load} / ${cap} units (${pct}%) — ${pass ? 'COMPLIANT' : 'OVERFILLED!'}
+      </div>
+      <div style="margin-top:4px;font-size:0.9rem;">
+        ${pass ? 'Cables fill does not exceed the 40% space factor limit. Easy drawing-in guaranteed.' : 'Violates 40% rule. High risk of cable jams and sheath rupture during pulling. Select larger conduit.'}
+      </div>
+    </div>
+  `;
+  playClick();
+};
+
+window.calcResistor = () => {
+  const b1 = $('#rc-b1').value;
+  const b2 = $('#rc-b2').value;
+  const m = parseFloat($('#rc-m').value);
+  const t = $('#rc-t').value;
+
+  const val = parseInt(b1 + b2, 10) * m;
+  let txt = val >= 1000000 ? (val / 1000000) + ' MΩ' : val >= 1000 ? (val / 1000) + ' kΩ' : val + ' Ω';
+  $('#rc-res').textContent = `${txt} ±${t}%`;
+};
+
+// =====================================================================
+// View 9: Active Recall Smart Flashcards (#/flashcards)
+// =====================================================================
+const flashcardsData = [
+  { c: 'Symbols', q: 'What is the BS / IEC symbol for an MCB?', a: 'A rectangle with an overload thermal curve (semi-circle) and arc chamber symbol.' },
+  { c: 'Symbols', q: 'What is the symbol for Two-Way Switching?', a: 'Two switches connected via two strapper conductors, with common terminals for live feed and lamp return.' },
+  { c: 'Regulations', q: 'What does ADS stand for in protection against electric shock?', a: 'Automatic Disconnection of Supply. Combines earthing, bonding, and protective devices (fuses/MCBs/RCDs).' },
+  { c: 'Regulations', q: 'What is the maximum operating tripping current of an RCD for additional protection?', a: '30 mA (operating within 300 ms at rated current).' },
+  { c: 'Regulations', q: 'Explain the difference between TN-S and TN-C-S earthing.', a: 'TN-S has separate Neutral and Earth conductors throughout. TN-C-S combines Neutral and Earth (PEN) in the supply and splits them in the installation.' },
+  { c: 'Formulas', q: 'State the formula for cable voltage drop.', a: 'Vd = (mV/A/m × I × L) ÷ 1000 (Vd in Volts, I in Amps, L in metres).' },
+  { c: 'Formulas', q: 'What is Ohm\'s Law and Electrical Power formulas?', a: 'V = I × R; P = V × I = I²R = V² / R.' },
+  { c: 'Formulas', q: 'State the formula for Resistivity of a conductor.', a: 'R = (ρ × L) ÷ A (where ρ is resistivity, L length, A cross-sectional area).' },
+  { c: 'Safety', q: 'State the strict first action when discovering an electric shock casualty.', a: 'Safely break contact or switch off power immediately. Never touch the casualty with bare hands while live!' },
+  { c: 'Safety', q: 'What type of fire extinguishers are safe for electrical fires?', a: 'CO₂ (Carbon Dioxide) and Dry Powder. NEVER use water or standard foam on live equipment.' }
+];
+
+let fcIdx = 0;
+let fcList = flashcardsData.slice();
+
+function flashcards() {
+  updateActiveNav('home');
+  fcIdx = 0;
+  renderFlashcardView();
+}
+
+function renderFlashcardView() {
+  const cur = fcList[fcIdx];
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Flashcards</span></div>
+    <h1>🎴 Active Recall Smart Flashcards</h1>
+    <p style="color:var(--mut);">Tap the card to flip and reveal the official answer. Test your active memory retention.</p>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:540px;margin:0 auto 12px;">
+      <span class="pill" style="font-size:0.85rem;">Card ${fcIdx + 1} of ${fcList.length}</span>
+      <span class="pill ok">${cur.c}</span>
+    </div>
+
+    <div class="flashcard-wrap" onclick="flipCard()">
+      <div class="flashcard" id="fcard">
+        <div class="flashcard-face">
+          <span style="font-size:0.75rem;color:var(--mut);font-weight:700;text-transform:uppercase;">Question / Prompt</span>
+          <h2 style="margin:16px 0;font-size:1.35rem;">${cur.q}</h2>
+          <span style="font-size:0.8rem;color:var(--cold);font-weight:600;">Tap to Flip Card 🔄</span>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <span style="font-size:0.75rem;color:var(--cold);font-weight:700;text-transform:uppercase;">Official Answer Scheme</span>
+          <p style="margin:16px 0;font-size:1.15rem;font-weight:600;color:var(--ink);">${cur.a}</p>
+          <span style="font-size:0.8rem;color:var(--mut);">Tap to Flip Back</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+      <button class="secondary" onclick="prevCard()">← Previous</button>
+      <button onclick="nextCard()">Next Card →</button>
+    </div>
+  `;
+}
+
+window.flipCard = () => {
+  playClick();
+  const c = $('#fcard');
+  if (c) c.classList.toggle('flipped');
+};
+
+window.nextCard = () => {
+  playClick();
+  fcIdx = (fcIdx + 1) % fcList.length;
+  renderFlashcardView();
+};
+
+window.prevCard = () => {
+  playClick();
+  fcIdx = (fcIdx - 1 + fcList.length) % fcList.length;
+  renderFlashcardView();
+};
+
+// =====================================================================
+// View 10: Daily 5-Question Drill (#/daily)
+// =====================================================================
+function daily() {
+  updateActiveNav('home');
+  const allQs = M.flatMap(m => m.q);
+  const drillQs = shuffle(allQs).slice(0, 5);
+
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Daily Drill</span></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span class="pill gold" style="font-size:1rem;">🔥 Streak: ${P.streak || 0} Days</span>
+    </div>
+    <h1>Daily 5-Question Trade Drill</h1>
+    <p style="color:var(--mut);">Complete today's quick 5-question workout to maintain your daily study streak!</p>
+    <div id="qz"></div>
+  `;
+
+  quiz($('#qz'), drillQs, 'daily_temp');
+
+  const oldChk = $('#chk');
+  if (oldChk) {
+    const origClick = oldChk.onclick;
+    oldChk.onclick = () => {
+      origClick();
+      const today = new Date().toISOString().slice(0, 10);
+      if (P.lastDaily !== today) {
+        P.streak = (P.streak || 0) + 1;
+        P.lastDaily = today;
+        save();
+        updateHeaderProgress();
+      }
+    };
+  }
+}
+
+// =====================================================================
+// View 11: Official NVTI Readiness Certificate (#/cert)
+// =====================================================================
+function cert() {
+  updateActiveNav('home');
+  const done = NV.filter(m => (best(m.id) || 0) >= 70).length;
+  const total = NV.length;
+  const pct = Math.round(done / total * 100);
+  const grade = pct >= 90 ? 'Distinction' : pct >= 75 ? 'Merit' : pct >= 70 ? 'Pass' : 'In Progress';
+  const name = localStorage.getItem('ela-student-name') || 'Electrical Apprentice';
+
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Certificate</span></div>
+    <h1>Certificate of Syllabus Readiness</h1>
+    <p style="color:var(--mut);">Official Certificate of Completion aligned with NVTI General Electrical qualifications.</p>
+
+    <div class="card" style="margin-bottom:20px;">
+      <label><b>Apprentice / Student Full Name:</b><br>
+        <input type="text" id="cert-name-input" value="${name}" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin-top:6px;font-size:1.1rem;background:var(--bg);color:var(--ink);">
+      </label>
+    </div>
+
+    <div class="cert-frame">
+      <div class="cert-seal">⚡</div>
+      <span style="letter-spacing:0.15em;text-transform:uppercase;font-weight:700;color:var(--cu);font-size:0.85rem;">Certificate of Trade Readiness</span>
+      <h1 style="font-size:2rem;margin:10px 0 6px;letter-spacing:-0.03em;">ELECTRICAL ACADEMY</h1>
+      <p style="color:var(--mut);font-size:0.95rem;">NVTI General Electrical Certificate One & Two</p>
+
+      <div style="margin:24px 0;">
+        <span style="font-size:0.9rem;color:var(--mut);">This is officially awarded to:</span>
+        <div id="cert-display-name" style="font-size:1.85rem;font-weight:800;color:var(--cold);margin:6px 0;font-family:var(--font-sans);">${name}</div>
+        <p style="max-width:540px;margin:12px auto;font-size:0.92rem;color:var(--ink-secondary);">
+          having demonstrated theoretical knowledge, completed practical workshop job sheets, and verified trade drawing schematics in compliance with the vocational syllabus.
+        </p>
+      </div>
+
+      <div style="display:flex;justify-content:space-around;border-top:1px solid var(--line);padding-top:18px;margin-top:20px;font-size:0.9rem;">
+        <div><b>Curriculum Mastery:</b><br><span style="color:var(--cold);font-weight:700;">${pct}%</span></div>
+        <div><b>Grade Classification:</b><br><span class="pill ${pct >= 70 ? 'ok' : 'warn'}">${grade}</span></div>
+        <div><b>Date Issued:</b><br><span>${new Date().toLocaleDateString()}</span></div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+      <button onclick="window.print()">🖨️ Print Certificate</button>
+      <a class="btn secondary" href="#/report">📄 View Full Academic Transcript</a>
+    </div>
+  `;
+
+  $('#cert-name-input').oninput = e => {
+    const val = e.target.value.trim() || 'Electrical Apprentice';
+    $('#cert-display-name').textContent = val;
+    localStorage.setItem('ela-student-name', val);
+  };
+}
+
+// =====================================================================
+// View 12: Full Academic Progress Report & Transcript (#/report)
+// =====================================================================
+function report() {
+  updateActiveNav('home');
+  const name = localStorage.getItem('ela-student-name') || 'Electrical Apprentice';
+  const done = NV.filter(m => (best(m.id) || 0) >= 70).length;
+  const pct = Math.round(done / NV.length * 100);
+
+  app.innerHTML = `
+    <div class="breadcrumb"><a href="#/">← Home</a> / <span>Academic Transcript</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h1>Academic Progress Transcript</h1>
+      <button onclick="window.print()">🖨️ Print Transcript</button>
+    </div>
+    <p style="color:var(--mut);">Complete record of theory module test scores, practical job sign-offs, and trade drawing marks.</p>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px;">
+        <div><b>Student:</b> ${name}</div>
+        <div><b>Program:</b> NVTI General Electrical Cert 1 & 2</div>
+        <div><b>Theory Mastery:</b> ${pct}%</div>
+      </div>
+
+      <h2>Theory Module Scores</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:20px;">
+        <thead>
+          <tr style="text-align:left;border-bottom:1px solid var(--line);">
+            <th style="padding:8px 0;">Code</th>
+            <th>Module Title</th>
+            <th>Best Score</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${NV.map(m => {
+            const sc = best(m.id);
+            const pass = sc != null && sc >= 70;
+            return `
+              <tr style="border-bottom:1px solid var(--line);">
+                <td style="padding:8px 0;font-family:var(--font-mono);">${m.id.toUpperCase()}</td>
+                <td>${m.t}</td>
+                <td><b>${sc != null ? sc + '%' : '–'}</b></td>
+                <td><span class="pill ${pass ? 'ok' : ''}">${sc == null ? 'Not taken' : pass ? 'Passed' : 'Needs Review'}</span></td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+
+      <h2>City & Guilds 2365 Level 2 Lesson Scores</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:20px;">
+        <thead><tr style="text-align:left;border-bottom:1px solid var(--line);"><th style="padding:8px 0;">Code</th><th>Lesson</th><th>Best Score</th><th>Status</th></tr></thead>
+        <tbody>
+          ${M.filter(isCG).map(m => {
+            const sc = best(m.id);
+            const pass = sc != null && sc >= 70;
+            return `<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px 0;font-family:var(--font-mono);">${m.id.toUpperCase()}</td><td>${m.t}</td><td><b>${sc != null ? sc + '%' : '-'}</b></td><td><span class="pill ${pass ? 'ok' : ''}">${sc == null ? 'Not taken' : pass ? 'Passed' : 'Needs Review'}</span></td></tr>`;
+          }).join('')}
+          ${Object.keys(CG.units).filter(u => CG.units[u].test).map(u => { const sc = best('cgx' + u); const ok = sc != null && sc >= CG.units[u].test.pass; return `<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px 0;font-family:var(--font-mono);">TEST ${u}</td><td>Unit ${u} timed practice test</td><td><b>${sc != null ? sc + '%' : '-'}</b></td><td><span class="pill ${ok ? 'ok' : ''}">${sc == null ? 'Not taken' : ok ? 'At pass mark' : 'Below pass mark'}</span></td></tr>`; }).join('')}
+        </tbody>
+      </table>
+
+      <h2>Practical Workshop Sign-Offs</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:20px;">
+        <thead>
+          <tr style="text-align:left;border-bottom:1px solid var(--line);">
+            <th style="padding:8px 0;">#</th>
+            <th>Task Name</th>
+            <th>Steps Completed</th>
+            <th>Instructor Sign-Off</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${Y.jobs.map((j, i) => {
+            const st = ((P.j || {})[i] || []).filter(Boolean).length;
+            const signed = !!(P.sig && P.sig[i]);
+            return `
+              <tr style="border-bottom:1px solid var(--line);">
+                <td style="padding:8px 0;">Job ${i + 1}</td>
+                <td>${j.t}</td>
+                <td>${st} / ${j.steps.length}</td>
+                <td><span class="pill ${signed ? 'ok' : ''}">${signed ? 'Verified by Instructor ✓' : 'Pending'}</span></td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+// =====================================================================
+// Search Modal
+// =====================================================================
+const searchModal = $('#search-modal');
+const searchBox = $('#search-box');
+const searchList = $('#search-list');
+
+function openSearch() {
+  searchModal.classList.add('open');
+  searchBox.value = '';
+  renderSearchResults('');
+  setTimeout(() => searchBox.focus(), 50);
+}
+
+function closeSearch() { searchModal.classList.remove('open'); }
+
+$('#btn-search').onclick = openSearch;
+$('#search-close').onclick = closeSearch;
+searchModal.onclick = e => { if (e.target === searchModal) closeSearch(); };
+
+window.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  if (e.key === 'Escape' && searchModal.classList.contains('open')) closeSearch();
+});
+
+function renderSearchResults(q) {
+  q = q.trim().toLowerCase();
+  const results = [];
+
+  M.forEach(m => {
+    if (!q || m.t.toLowerCase().includes(q) || m.id.toLowerCase().includes(q) || m.s.toLowerCase().includes(q)) {
+      results.push({ title: `${m.id.toUpperCase()}: ${m.t}`, sub: m.s, url: `#/m/${m.id}`, type: 'Module' });
+    }
+  });
+
+  if (window.Y && Y.jobs) {
+    Y.jobs.forEach((j, i) => {
+      if (!q || j.t.toLowerCase().includes(q) || j.tools.toLowerCase().includes(q)) {
+        results.push({ title: j.t, sub: `Tools: ${j.tools}`, url: `#/job/${i}`, type: 'Job Sheet' });
+      }
+    });
+  }
+
+  results.push(
+    { title: 'House Wiring Practice', sub: 'Choose rooms, wire the house, switch on, see RCD and MCB trips', url: '#/house', type: 'Simulator' },
+    { title: 'Two-Way Switching Circuit Simulator', sub: 'Interactive toggle bench', url: '#/sims', type: 'Simulator' },
+    { title: 'Safe Isolation Protocol Sequencer', sub: '6-step isolation safety tool', url: '#/sims', type: 'Simulator' },
+    { title: 'City & Guilds 2365 Level 2 and Level 3 track', sub: 'Units 201 to 210 and 301 to 308, with unit tests', url: '#/cg', type: 'City & Guilds' },
+    { title: 'Intermediate Switching Simulator', sub: 'Control one lamp from three places', url: '#/sims', type: 'Simulator' },
+    { title: 'DOL Motor Starter Simulator', sub: 'Start, stop, hold-in, overload, no-volt release', url: '#/sims', type: 'Simulator' },
+    { title: 'Star-Delta Starting Sequence', sub: 'Contactors, current and speed', url: '#/sims', type: 'Simulator' },
+    { title: 'Series-Parallel Circuit Lab', sub: 'Voltage, current and power', url: '#/sims', type: 'Simulator' },
+    { title: 'Earth Fault Loop Impedance Checker', sub: 'Zs against MCB type and rating', url: '#/sims', type: 'Simulator' },
+    { title: 'RCD Trip Tester', sub: '1/2, 1 and 5 times I-delta-n tests', url: '#/sims', type: 'Simulator' },
+    { title: 'Power Factor Correction Simulator', sub: 'Capacitor kVAr and current saved', url: '#/sims', type: 'Simulator' },
+    { title: 'Logic Gate Lab', sub: 'Gates and truth tables', url: '#/sims', type: 'Simulator' },
+    { title: 'AC and Three-Phase Waveform Lab', sub: 'RMS, peak, frequency, 120 degree phases', url: '#/sims', type: 'Simulator' },
+    { title: 'Transformer Lab', sub: 'Turns ratio, voltage and current', url: '#/sims', type: 'Simulator' },
+    { title: 'Ohm\'s Law & Power Wheel Calculator', sub: 'Solve V, I, R, P', url: '#/tools', type: 'Toolkit' },
+    { title: 'Cable Sizing & Voltage Drop Calculator', sub: 'Regulations check (3% & 5%)', url: '#/tools', type: 'Toolkit' },
+    { title: 'Conduit Space Factor (40% rule)', sub: 'Cable fill capacity checker', url: '#/tools', type: 'Toolkit' },
+    { title: 'Active Recall Smart Flashcards', sub: 'Symbols, formulas & rules', url: '#/flashcards', type: 'Flashcards' }
+  );
+
+  const matched = results.filter(r => !q || r.title.toLowerCase().includes(q) || r.sub.toLowerCase().includes(q));
+
+  if (!matched.length) {
+    searchList.innerHTML = `<p style="padding:20px;text-align:center;color:var(--mut);">No matching modules or topics found.</p>`;
+    return;
+  }
+
+  searchList.innerHTML = matched.slice(0, 15).map(r => `
+    <a class="search-item" href="${r.url}" onclick="closeSearch()">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <b>${r.title}</b>
+        <span class="pill" style="font-size:0.75rem;">${r.type}</span>
+      </div>
+      <div style="font-size:0.8rem;color:var(--mut);margin-top:2px;">${r.sub}</div>
+    </a>
+  `).join('');
+}
+
+searchBox.oninput = () => renderSearchResults(searchBox.value);
+
+// =====================================================================
+// Stats Progress Modal
+// =====================================================================
+const statsModal = $('#stats-modal');
+$('#btn-stats').onclick = () => {
+  const done = NV.filter(m => (best(m.id) || 0) >= 70).length;
+  const total = NV.length;
+  const pct = Math.round(done / total * 100);
+
+  $('#stats-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;">
+      <div class="card" style="text-align:center;margin:0;">
+        <span style="font-size:0.8rem;color:var(--mut);font-weight:700;">MODULE MASTERY</span>
+        <div style="font-size:2rem;font-weight:800;color:var(--cold);">${pct}%</div>
+        <span style="font-size:0.8rem;color:var(--mut);">${done}/${total} Passed</span>
+      </div>
+      <div class="card" style="text-align:center;margin:0;">
+        <span style="font-size:0.8rem;color:var(--mut);font-weight:700;">PRACTICAL JOBS</span>
+        <div style="font-size:2rem;font-weight:800;color:var(--ok);">${jobPct()}%</div>
+        <span style="font-size:0.8rem;color:var(--mut);">${jobDone()}/${jobTotal()} Steps Done</span>
+      </div>
+    </div>
+    <div class="card" style="margin:0 0 12px;">
+      <b>Mock Exam Best Scores:</b>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.9rem;">
+        <span>Cert 1 Mock:</span>
+        <b>${best('exame1') != null ? best('exame1') + '%' : 'Not taken'}</b>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:0.9rem;">
+        <span>Cert 2 Mock:</span>
+        <b>${best('exame2') != null ? best('exame2') + '%' : 'Not taken'}</b>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:0.9rem;">
+        <span>International Standards:</span>
+        <b>${best('examint') != null ? best('examint') + '%' : 'Not taken'}</b>
+      </div>
+    </div>
+  `;
+  statsModal.classList.add('open');
+};
+
+$('#stats-close').onclick = () => statsModal.classList.remove('open');
+statsModal.onclick = e => { if (e.target === statsModal) statsModal.classList.remove('open'); };
+
+$('#btn-reset-data').onclick = () => {
+  if (confirm('Are you sure you want to clear all your test scores and practical job checkmarks?')) {
+    P = {};
+    save();
+    statsModal.classList.remove('open');
+    route();
+  }
+};
+
+// =====================================================================
+// Router
+// =====================================================================
+function route() {
+  clearInterval(window.T);
+  const h = location.hash.split('/');
+  window.scrollTo(0, 0);
+  renderSidebar();
+
+  if (h[1] === 'm') mod(h[2]);
+  else if (h[1] === 'exam') exam(h[2]);
+  else if (h[1] === 'cg') cgHub();
+  else if (h[1] === 'cgexam') cgExam(h[2]);
+  else if (h[1] === 'jobs') jobs();
+  else if (h[1] === 'draw') draw();
+  else if (h[1] === 'job') job(+h[2]);
+  else if (h[1] === 'sims') sims();
+  else if (h[1] === 'house') houseView();
+  else if (h[1] === 'tools') tools();
+  else if (h[1] === 'flashcards') flashcards();
+  else if (h[1] === 'daily') daily();
+  else if (h[1] === 'cert') cert();
+  else if (h[1] === 'report') report();
+  else home();
+}
+
+addEventListener('hashchange', route);
+route();
+
+// Service Worker for offline PWA functionality
+if ('serviceWorker' in navigator) {
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
